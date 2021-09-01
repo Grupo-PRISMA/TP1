@@ -1,0 +1,117 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>320</x><y>290</y><w>390</w><h>200</h></coordinates><panel_attributes>Plataforma/Web
+--
+-visitantes: Visitante []
+-atracciones: Atraccion []
+-promociones: Promocion []
+-sugerenciasOfertadas: Sugerencia []
+--
+-construirVisitantes(LecturaEntrada.getDatos()): void
+-construirAtracciones(LecturaEntrada.getDatos()): void
+-construirPromociones(LecturaEntrada.getDatos()): void
+-compareTo(): int
+-crearSugerencia(Visitante, Atraccion [], Promocion []): Sugerencia
+
++toString():void
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>760</x><y>570</y><w>220</w><h>190</h></coordinates><panel_attributes>Atraccion
+--
+-nombre: String
+-costo: double 
+-duracionHs: double
+-cupoPersonas: int
+
+--
+bajarCupo(): void
+hayCupo(): boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1120</x><y>290</y><w>170</w><h>120</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+TipoDeAtraccion
+--
+_+PAISAJE_
+_+AVENTURA_
+_+DEGUSTACION_
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>790</x><y>290</y><w>240</w><h>190</h></coordinates><panel_attributes>Visitante
+--
+-nombre: String
+-presupuesto: double 
+-tiempoDisponibleHs: double
+-itinerario: Sugerencia[]
+--
++getPresupuesto(): double
++getTiempoDisponibleHs(): double
++getPreferencia():TipoDeAtraccion
++aceptaSugerencia(Sugerencia): boolean
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1020</x><y>340</y><w>120</w><h>50</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+-preferencia</panel_attributes><additional_attributes>100;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>970</x><y>400</y><w>210</w><h>270</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+-tipo</panel_attributes><additional_attributes>170;10;170;250;10;250</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>840</y><w>160</w><h>120</h></coordinates><panel_attributes>PromocionPorcentual
+--
+_-PORCENTAJE: double_
+--
+-calculoPromocion(): double
++getCostoTotal(): double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>700</y><w>410</w><h>50</h></coordinates><panel_attributes>lt=&lt;-
+m1=1..*
+-atracciones</panel_attributes><additional_attributes>390;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>170</x><y>840</y><w>170</w><h>120</h></coordinates><panel_attributes>PromocionAbsoluta
+--
+_-DESCUENTO_FIJO: double_
+--
+-calculoPromocion(): double
++getCostoTotal(): double</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>150</x><y>610</y><w>230</w><h>190</h></coordinates><panel_attributes>/&lt;&lt;abstract&gt;&gt;/
+/Promocion/
+--
+-nombre: String
+-nombreDescuento: String
+
+--
++Promocion(): void
+/+calculoPromocion(): double/
+/+getCostoTotal(): double/
++mostrarPromocion(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>400</y><w>860</w><h>410</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+-tipo</panel_attributes><additional_attributes>820;10;820;390;10;390</additional_attributes></element><element><id>UMLClass</id><coordinates><x>350</x><y>840</y><w>160</w><h>120</h></coordinates><panel_attributes>PromocionAxB
+--
+-actividadGratis: Atraccion
+--
+-calculoPromocion(): double
++getCostoTotal(): double</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>100</x><y>770</y><w>70</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>50;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>240</x><y>790</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>790</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>560</x><y>480</y><w>220</w><h>200</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
+-atracciones</panel_attributes><additional_attributes>200;170;10;170;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>310</x><y>60</y><w>130</w><h>30</h></coordinates><panel_attributes>Visitantes.csv
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>480</y><w>100</w><h>150</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
+-promociones</panel_attributes><additional_attributes>10;130;10;10;20;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>400</x><y>150</y><w>240</w><h>100</h></coordinates><panel_attributes>LecturaEntrada
+--
+-datos: String []
+--
++leerArchivo(Archivo): void
++getDatos(): String []
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>500</x><y>240</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>160</x><y>150</y><w>180</w><h>100</h></coordinates><panel_attributes>Consola
+--
+
+
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>450</x><y>60</y><w>130</w><h>30</h></coordinates><panel_attributes>Atracciones.csv
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>590</x><y>60</y><w>130</w><h>30</h></coordinates><panel_attributes>Promociones.csv
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>80</y><w>60</w><h>90</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;40;70</additional_attributes></element><element><id>Relation</id><coordinates><x>500</x><y>80</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>590</x><y>80</y><w>70</w><h>90</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>50;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>700</x><y>390</y><w>110</w><h>30</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>660</x><y>130</y><w>180</w><h>60</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+Comparable
+--
++compareTo(): int
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>670</x><y>180</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>UMLClass</id><coordinates><x>890</x><y>100</y><w>160</w><h>130</h></coordinates><panel_attributes>Sugerencia
+--
+-nombre: String
+-costo: double
+-duracionHs: int
+-aceptada: boolean
+--
++setAceptada(boolean): void
++toString(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>700</x><y>190</y><w>210</w><h>120</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>190;10;10;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1110</x><y>180</y><w>190</w><h>100</h></coordinates><panel_attributes>EscrituraSalida
+--
+--
++crearArchivo(Sugerencia[]): void
++getDatos(): String []
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1010</x><y>220</y><w>120</w><h>90</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;70;100;10</additional_attributes></element><element><id>Relation</id><coordinates><x>700</x><y>340</y><w>110</w><h>50</h></coordinates><panel_attributes>lt=&lt;-
+m1=1..*
+-visitantes</panel_attributes><additional_attributes>90;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>930</x><y>220</y><w>80</w><h>90</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
+-itinerario</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element></diagram>
