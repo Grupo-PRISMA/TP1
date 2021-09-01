@@ -2,7 +2,7 @@ package paquete;
 
 import java.util.Arrays;
 
-public class Promocion {
+public abstract class Promocion {
 	private TipoDeAtraccion tipo;
 	private String nombreDescuento;
 	private Atraccion[] atracciones;
