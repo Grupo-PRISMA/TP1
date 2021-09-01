@@ -7,26 +7,27 @@ public abstract class Promocion {
 	private String nombreDescuento;
 	private Atraccion[] atracciones;
 
-	public Promocion(TipoDeAtraccion tipo, String promo, Atraccion[] atracciones) {
-			this.tipo = tipo;
-			this.nombreDescuento = promo;
-			this.atracciones = atracciones;
-		}
-
-	public TipoDeAtraccion getTipo() {
-		return tipo;
+	public Promocion(TipoDeAtraccion tipo, String nombreDescuento, Atraccion[] atracciones) {
+		this.tipo = tipo;
+		this.nombreDescuento = nombreDescuento;
+		this.atracciones = atracciones;
 	}
 
-	public String getPromo() {
-		return nombreDescuento;
+	public TipoDeAtraccion getTipo() {
+		return this.tipo;
+	}
+
+	public String getNombreDescuento() {
+		return this.nombreDescuento;
 	}
 
 	public Atraccion[] getAtracciones() {
-		return atracciones;
+		return this.atracciones;
 	}
 
 	@Override
 	public String toString() {
-		return "Tipo = " + tipo + ", Promo = " + nombreDescuento + ", Atracciones = " + Arrays.toString(atracciones) + "\n";
+		return "Tipo = " + tipo + ", Nombre Promo = " + nombreDescuento + ", Atracciones = "
+				+ Arrays.toString(atracciones) + "\n";
 	}
 }

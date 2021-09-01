@@ -3,7 +3,7 @@ package paquete;
 import java.util.Arrays;
 
 public class PlataformaWeb {
-	private Visitante[] usuarios;
+	private Visitante[] visitantes;
 	private Atraccion[] atracciones;
 	private Promocion[] promociones;
 
@@ -11,15 +11,15 @@ public class PlataformaWeb {
 
 	}
 
-	public void agregarTodosUsuarios(Visitante[] usuarios) {
-		this.usuarios = usuarios;
+	public void construirVisitantes(Visitante[] visitantes) {
+		this.visitantes = visitantes;
 	}
 
-	public void agregarTodasAtracciones(Atraccion[] atracciones) {
+	public void construirAtracciones(Atraccion[] atracciones) {
 		this.atracciones = atracciones;
 	}
 
-	public void agregarTodasPromociones(Promocion[] promociones) {
+	public void construirPromociones(Promocion[] promociones) {
 		this.promociones = promociones;
 	}
 
@@ -34,7 +34,7 @@ public class PlataformaWeb {
 
 	@Override
 	public String toString() {
-		return "Carga:\n" + "Usuarios:\n" + Arrays.toString(usuarios) + "\n" + "Atracciones:\n"
+		return "Carga:\n" + "Visitantes:\n" + Arrays.toString(visitantes) + "\n" + "Atracciones:\n"
 				+ Arrays.toString(atracciones) + "\n" + "Promociones:\n" + Arrays.toString(promociones) + "\n";
 	}
 }

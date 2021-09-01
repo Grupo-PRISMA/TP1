@@ -5,9 +5,9 @@ public class Main {
 	public static void main(String[] args) {
 		PlataformaWeb carga = new PlataformaWeb();
 
-		carga.agregarTodosUsuarios(ManejadorArchivos.obtenerUsuariosDesdeArchivo());
-		carga.agregarTodasAtracciones(ManejadorArchivos.obtenerAtraccionesDesdeArchivo());
-		carga.agregarTodasPromociones(ManejadorArchivos.obtenerPromocionesDesdeArchivo());
+		carga.construirVisitantes(ManejadorArchivos.obtenerVisitantesDesdeArchivo());
+		carga.construirAtracciones(ManejadorArchivos.obtenerAtraccionesDesdeArchivo());
+		carga.construirPromociones(ManejadorArchivos.obtenerPromocionesDesdeArchivo());
 
 		// Listo todas las atracciones y las promociones con su contenido
 		System.out.println(carga.toString());

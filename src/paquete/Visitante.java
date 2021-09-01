@@ -20,31 +20,31 @@ public class Visitante {
 	}
 
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
-	
+
 	public TipoDeAtraccion getPreferencia() {
-		return preferencia;
+		return this.preferencia;
 	}
 
 	public double getPresupuesto() {
-		return presupuesto;
+		return this.presupuesto;
 	}
 
 	public double getTiempoDisponibleHs() {
-		return tiempoDisponibleHs;
+		return this.tiempoDisponibleHs;
 	}
 
 	public boolean aceptaSugerencia(Sugerencia sugerencia) {
-		char rta;
+		char respuesta;
 		Scanner entradaEscaner = new Scanner(System.in);
 		System.out.println("¿Acepta sugerencia? (S/N)");
-		rta = entradaEscaner.nextLine().charAt(0);
+		respuesta = entradaEscaner.nextLine().charAt(0);
 		entradaEscaner.close();
-		sugerencia.setAceptada(Character.toUpperCase(rta) == 'S');
+		sugerencia.setAceptada(Character.toUpperCase(respuesta) == 'S');
 		this.itinerario.add(sugerencia);
 
-		return Character.toUpperCase(rta) == 'S';
+		return Character.toUpperCase(respuesta) == 'S';
 	}
 
 	@Override
@@ -52,5 +52,5 @@ public class Visitante {
 		return "Visitante [Nombre = " + nombre + ", Presupuesto = " + presupuesto + ", Tiempo Disponible Hs = "
 				+ tiempoDisponibleHs + ", Preferencia = " + preferencia + "]";
 	}
-	
+
 }

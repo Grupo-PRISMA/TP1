@@ -6,7 +6,7 @@ public class Atraccion {
 	private double costo;
 	private double duracionHs;
 	private int cupoPersonas;
-	
+
 	public Atraccion(String nombre, TipoDeAtraccion tipo, double costo, double horas, int cupoPersonas) {
 		this.nombre = nombre;
 		this.tipo = tipo;
@@ -16,31 +16,31 @@ public class Atraccion {
 	}
 
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 
 	public TipoDeAtraccion getTipo() {
-		return tipo;
+		return this.tipo;
 	}
 
 	public double getCosto() {
-		return costo;
+		return this.costo;
 	}
 
-	public double getHoras() {
-		return duracionHs;
+	public double getDuracionHs() {
+		return this.duracionHs;
 	}
 
 	public int getCupoPersonas() {
-		return cupoPersonas;
+		return this.cupoPersonas;
 	}
 
 	@Override
 	public String toString() {
-		return "Nombre = " + nombre + ", Tipo = " + tipo + ", Costo = " + costo +
-				", Horas = " + duracionHs + ", Cupo Personas = " + cupoPersonas + "\n";
+		return "Nombre = " + nombre + ", Tipo = " + tipo + ", Costo = " + costo + ", Duracion en Horas = " + duracionHs
+				+ ", Cupo Personas = " + cupoPersonas + "\n";
 	}
-	
+
 //	public static Atracciones getAtraccionPorNombre(String nombre) {
 //		if (){
 //			
@@ -49,4 +49,3 @@ public class Atraccion {
 //	}
 //	
 }
-

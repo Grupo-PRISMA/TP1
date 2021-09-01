@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public abstract class ManejadorArchivos {
-	public static Visitante[] obtenerUsuariosDesdeArchivo() {
+	public static Visitante[] obtenerVisitantesDesdeArchivo() {
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
@@ -14,7 +14,7 @@ public abstract class ManejadorArchivos {
 		Visitante[] visitantes = null;
 
 		try {
-			archivo = new File("entrada/usuarios.txt");
+			archivo = new File("entrada/visitantes.txt");
 			fr = new FileReader(archivo);
 			br = new BufferedReader(fr);
 
@@ -24,14 +24,14 @@ public abstract class ManejadorArchivos {
 			int indice = 0;
 			String linea = br.readLine();
 			while (linea != null) {
-				String[] datosUsuarios = linea.split(",");
+				String[] datosVisitantes = linea.split(",");
 
-				String nombre = datosUsuarios[0];
-				TipoDeAtraccion tipo = TipoDeAtraccion.valueOf(datosUsuarios[1]);
-				double dineroDisponible = Integer.parseInt(datosUsuarios[2]);
-				double horasDisponibles = Integer.parseInt(datosUsuarios[3]);
+				String nombre = datosVisitantes[0];
+				TipoDeAtraccion tipo = TipoDeAtraccion.valueOf(datosVisitantes[1]);
+				double presupuesto = Integer.parseInt(datosVisitantes[2]);
+				double tiempoDisponibleHs = Integer.parseInt(datosVisitantes[3]);
 
-				visitantes[indice++] = new Visitante(nombre, dineroDisponible, horasDisponibles, tipo);
+				visitantes[indice++] = new Visitante(nombre, presupuesto, tiempoDisponibleHs, tipo);
 				linea = br.readLine();
 			}
 
@@ -76,10 +76,10 @@ public abstract class ManejadorArchivos {
 				String nombre = datosAtracciones[0];
 				TipoDeAtraccion tipo = TipoDeAtraccion.valueOf(datosAtracciones[1]);
 				double costo = Double.parseDouble(datosAtracciones[2]);
-				double horas = Double.parseDouble(datosAtracciones[3]);
-				int cupo = Integer.parseInt(datosAtracciones[4]);
+				double duracionHs = Double.parseDouble(datosAtracciones[3]);
+				int cupoPersonas = Integer.parseInt(datosAtracciones[4]);
 
-				atracciones[indice++] = new Atraccion(nombre, tipo, costo, horas, cupo);
+				atracciones[indice++] = new Atraccion(nombre, tipo, costo, duracionHs, cupoPersonas);
 				linea = br.readLine();
 			}
 
@@ -122,14 +122,14 @@ public abstract class ManejadorArchivos {
 				String[] datosPromociones = linea.split(",");
 
 				TipoDeAtraccion tipo = TipoDeAtraccion.valueOf(datosPromociones[0]);
-				String promo = datosPromociones[1];
+				String nombreDescuento = datosPromociones[1];
 
 				String[] datosAtracciones = datosPromociones[2].split(";");
 				Atraccion[] atracciones = new Atraccion[datosAtracciones.length];
 //				Atraccion atraccion1 = Atraccion.getAtraccionPorNombre(datosAtracciones[0]);
 //				Atraccion atraccion2 = Atraccion.getAtraccionPorNombre(datosAtracciones[1]);
 
-				promociones[indice++] = new Promocion(tipo, promo, atracciones);
+				promociones[indice++] = new Promocion(tipo, nombreDescuento, atracciones);
 				linea = br.readLine();
 			}
 
@@ -152,4 +152,3 @@ public abstract class ManejadorArchivos {
 	}
 
 }
-
