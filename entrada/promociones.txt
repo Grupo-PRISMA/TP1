@@ -1,0 +1,4 @@
+3
+aventura,0.2,Bosque Negro;Mordor
+degustacion,36,Lothlórien;La Comarca
+paisajes,Erebor,Minas Tirith;Abismo de Helm
