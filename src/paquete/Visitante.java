@@ -8,17 +8,23 @@ public class Visitante {
 	private double presupuesto;
 	private double tiempoDisponibleHs;
 	private TipoDeAtraccion preferencia;
+
 	private ArrayList<Sugerencia> itinerario;
 
-	public Visitante(String nombre, double presupuesto, double tiempoDisponibleHs) {
+	public Visitante(String nombre, double presupuesto, double tiempoDisponibleHs, TipoDeAtraccion preferencia) {
 		this.nombre = nombre;
 		this.presupuesto = presupuesto;
 		this.tiempoDisponibleHs = tiempoDisponibleHs;
+		this.preferencia = preferencia;
 		this.itinerario = new ArrayList<Sugerencia>();
 	}
 
 	public String getNombre() {
 		return nombre;
+	}
+	
+	public TipoDeAtraccion getPreferencia() {
+		return preferencia;
 	}
 
 	public double getPresupuesto() {
@@ -40,4 +46,11 @@ public class Visitante {
 
 		return Character.toUpperCase(rta) == 'S';
 	}
+
+	@Override
+	public String toString() {
+		return "Visitante [Nombre = " + nombre + ", Presupuesto = " + presupuesto + ", Tiempo Disponible Hs = "
+				+ tiempoDisponibleHs + ", Preferencia = " + preferencia + "]";
+	}
+	
 }
