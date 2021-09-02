@@ -30,4 +30,8 @@ public abstract class Promocion {
 		return "Tipo = " + tipo + ", Nombre Promo = " + nombreDescuento + ", Atracciones = "
 				+ Arrays.toString(atracciones) + "\n";
 	}
+	
+	public abstract double calculoPromocion();
+	
+	public abstract double getCostoTotal();
 }
