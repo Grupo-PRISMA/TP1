@@ -13,10 +13,10 @@ public class Main {
 		System.out.println(carga.toString());
 
 		// Leer por consola y mostrar por pantalla
-		//Scanner in = new Scanner(System.in);
-		//String entradaConsola = in.nextLine();
-		//System.err.println(entradaConsola);
-		//in.close();
+		// Scanner in = new Scanner(System.in);
+		// String entradaConsola = in.nextLine();
+		// System.err.println(entradaConsola);
+		// in.close();
 	}
-	
+
 }

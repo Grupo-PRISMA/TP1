@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import jdk.internal.misc.FileSystemOption;
+
 public abstract class ManejadorArchivos {
 	public static Visitante[] obtenerVisitantesDesdeArchivo() {
 		File archivo = null;
@@ -122,7 +124,7 @@ public abstract class ManejadorArchivos {
 				String[] datosPromociones = linea.split(",");
 
 				String Id = datosPromociones[0];
-				TipoDeAtraccion tipoDeAtraccion = TipoDeAtraccion.valueOf(datosPromociones[1]);
+				TipoDeAtraccion tipo = TipoDeAtraccion.valueOf(datosPromociones[1]);
 				String descuento = datosPromociones[2];
 
 				String[] datosAtracciones = datosPromociones[3].split(";");
@@ -131,11 +133,11 @@ public abstract class ManejadorArchivos {
 //				Atraccion atraccion2 = Atraccion.getAtraccionPorNombre(datosAtracciones[1]);
 
 				if (Id == "porcentual") {
-					promociones[indice++] = new PromocionPorcentual(tipoDeAtraccion, descuento, atracciones);
+					promociones[indice++] = new PromocionPorcentual(tipo, descuento, atracciones);
 				} else if (Id == "absoluta") {
-					promociones[indice++] = new PromocionAbsoluta(tipoDeAtraccion, descuento, atracciones);
+					promociones[indice++] = new PromocionAbsoluta(tipo, descuento, atracciones);
 				} else if (Id == "AxB") {
-					promociones[indice++] = new PromocionAxB(tipoDeAtraccion, descuento, atracciones, descuento);
+					promociones[indice++] = new PromocionAxB(tipo, descuento, atracciones);
 				}
 
 				linea = br.readLine();

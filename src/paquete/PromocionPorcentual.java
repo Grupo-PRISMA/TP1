@@ -1,21 +1,18 @@
 package paquete;
 
 public class PromocionPorcentual extends Promocion {
+	private static final String ID = "porcentual";
 	private double doubleDescuento;
-	private double costoTotal;
 	
-	public PromocionPorcentual(TipoDeAtraccion tipoDeAtraccion, String descuento, Atraccion[] atracciones) {
-		super(tipoDeAtraccion, descuento, atracciones);
+	
+	public PromocionPorcentual(TipoDeAtraccion tipo, String descuento, Atraccion[] atracciones) {
+		super(tipo, atracciones);
 		this.doubleDescuento = Double.parseDouble(descuento);
-	}
-
-	@Override
-	public double getCostoTotal() {
-		return costoTotal;
+		super.id = PromocionPorcentual.ID;
 	}
 
 	@Override
 	public void calculoPromocion() {
-		costoTotal = (atracciones[0].getCosto() + atracciones[1].getCosto()) * doubleDescuento;	
+		super.costoTotal = (atracciones[0].getCosto() + atracciones[1].getCosto()) * doubleDescuento;	
 	}	
 }
