@@ -1,22 +1,26 @@
 package paquete;
 
 public class PromocionAxB extends Promocion {
-	private Atraccion [] actividadGratis;
-	
-	public PromocionAxB(TipoDeAtraccion tipo, String nombreDescuento, Atraccion[] atracciones, Atraccion [] actividadGratis) {
-		super(tipo, nombreDescuento, atracciones);
-		this.actividadGratis = actividadGratis;
-	}
 
-	@Override
-	public double calculoPromocion() {
+	private String atraccionGratis;
+	private double costoTotal;
+
+	public PromocionAxB(TipoDeAtraccion tipo, String nombreDescuento, Atraccion[] atracciones, String descuento) {
+		super(tipo, nombreDescuento, atracciones);
+		this.atraccionGratis = descuento;
+	}
 		
-		return 0;
+	public String getAtraccionGratis() {
+		return atraccionGratis;
 	}
 
 	@Override
 	public double getCostoTotal() {
-		
-		return 0;
+		return costoTotal;
+	}
+
+	@Override
+	public void calculoPromocion() {
+		costoTotal = (atracciones[0].getCosto() + atracciones[1].getCosto());		
 	}	
 }

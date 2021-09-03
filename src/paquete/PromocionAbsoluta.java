@@ -1,22 +1,22 @@
 package paquete;
 
 public class PromocionAbsoluta extends Promocion {
-	private double DESCUENTO_FIJO;
 	
-	public PromocionAbsoluta(TipoDeAtraccion tipo, String nombreDescuento, Atraccion[] atracciones, double DESCUENTO_FIJO) {
-		super(tipo, nombreDescuento, atracciones);
-		this.DESCUENTO_FIJO = DESCUENTO_FIJO;
-	}
+	private double descuentoDouble;
+	private double costoTotal;
 
-	@Override
-	public double calculoPromocion() {
-		
-		return 0;
-	}
+	public PromocionAbsoluta(TipoDeAtraccion tipo, String nombreDescuento, Atraccion[] atracciones, String descuento) {
+		super(tipo, nombreDescuento, atracciones);
+		this.descuentoDouble = Double.parseDouble(descuento);
+	}	
 
 	@Override
 	public double getCostoTotal() {
-		
-		return 0;
-	}		
+		return costoTotal;
+	}
+
+	@Override
+	public void calculoPromocion() {
+		costoTotal = descuentoDouble;		
+	}	
 }

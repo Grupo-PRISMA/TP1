@@ -3,13 +3,13 @@ package paquete;
 import java.util.Arrays;
 
 public abstract class Promocion {
-	private TipoDeAtraccion tipo;
-	private String nombreDescuento;
-	private Atraccion[] atracciones;
+	protected TipoDeAtraccion tipo;
+	protected String tipoDeAtraccion;
+	protected Atraccion[] atracciones;
 
 	public Promocion(TipoDeAtraccion tipo, String nombreDescuento, Atraccion[] atracciones) {
 		this.tipo = tipo;
-		this.nombreDescuento = nombreDescuento;
+		this.tipoDeAtraccion = nombreDescuento;
 		this.atracciones = atracciones;
 	}
 
@@ -18,7 +18,7 @@ public abstract class Promocion {
 	}
 
 	public String getNombreDescuento() {
-		return this.nombreDescuento;
+		return this.tipoDeAtraccion;
 	}
 
 	public Atraccion[] getAtracciones() {
@@ -27,11 +27,11 @@ public abstract class Promocion {
 
 	@Override
 	public String toString() {
-		return "Tipo = " + tipo + ", Nombre Promo = " + nombreDescuento + ", Atracciones = "
+		return "Tipo = " + tipo + ", Nombre Promo = " + tipoDeAtraccion + ", Atracciones = "
 				+ Arrays.toString(atracciones) + "\n";
 	}
 	
-	public abstract double calculoPromocion();
-	
 	public abstract double getCostoTotal();
+	
+	public abstract void calculoPromocion();
 }
