@@ -5,7 +5,7 @@ public class PromocionAxB extends Promocion {
 	private Atraccion atraccionGratis;
 	private double costoTotal;
 
-	public PromocionAxB(TipoDeAtraccion tipo, String nombreDescuento, Atraccion[] atracciones, Atraccion descuento) {
+	public PromocionAxB(TipoDeAtraccion tipo, String nombreDescuento, Atraccion[] atracciones, String descuento) {
 		super(tipo, nombreDescuento, atracciones);
 		this.atraccionGratis = Atraccion.getAtraccionPorNombre(descuento);
 	}
