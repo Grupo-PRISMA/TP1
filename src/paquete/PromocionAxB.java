@@ -2,15 +2,15 @@ package paquete;
 
 public class PromocionAxB extends Promocion {
 
-	private String atraccionGratis;
+	private Atraccion atraccionGratis;
 	private double costoTotal;
 
-	public PromocionAxB(TipoDeAtraccion tipo, String nombreDescuento, Atraccion[] atracciones, String descuento) {
+	public PromocionAxB(TipoDeAtraccion tipo, String nombreDescuento, Atraccion[] atracciones, Atraccion descuento) {
 		super(tipo, nombreDescuento, atracciones);
-		this.atraccionGratis = descuento;
+		this.atraccionGratis = Atraccion.getAtraccionPorNombre(descuento);
 	}
 		
-	public String getAtraccionGratis() {
+	public Atraccion getAtraccionGratis() {
 		return atraccionGratis;
 	}
 
