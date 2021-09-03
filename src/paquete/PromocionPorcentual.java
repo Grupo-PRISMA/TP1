@@ -1,5 +1,7 @@
 package paquete;
 
+import java.util.Arrays;
+
 public class PromocionPorcentual extends Promocion {
 	private static final String ID = "porcentual";
 	private double doubleDescuento;
@@ -14,5 +16,13 @@ public class PromocionPorcentual extends Promocion {
 	@Override
 	public void calculoPromocion() {
 		super.costoTotal = (atracciones[0].getCosto() + atracciones[1].getCosto()) * doubleDescuento;	
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "PromocionPorcentual [doubleDescuento=" + doubleDescuento + "]";
+	}
+	
+	
+
 }

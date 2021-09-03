@@ -13,5 +13,12 @@ public class PromocionAbsoluta extends Promocion {
 	@Override
 	public void calculoPromocion() {
 		super.costoTotal =(atracciones[0].getCosto() + atracciones[1].getCosto()) - descuentoDouble;
+	}
+
+	@Override
+	public String toString() {
+		return "PromocionAbsoluta [descuentoDouble=" + descuentoDouble + "]";
 	}	
+	
+	
 }

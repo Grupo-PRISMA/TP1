@@ -4,8 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
-import jdk.internal.misc.FileSystemOption;
+import java.util.Arrays;
 
 public abstract class ManejadorArchivos {
 	public static Visitante[] obtenerVisitantesDesdeArchivo() {
@@ -22,8 +21,8 @@ public abstract class ManejadorArchivos {
 
 			int cantidad = Integer.parseInt(br.readLine());
 			visitantes = new Visitante[cantidad];
-
 			int indice = 0;
+			
 			String linea = br.readLine();
 			while (linea != null) {
 				String[] datosVisitantes = linea.split(",");
@@ -109,6 +108,7 @@ public abstract class ManejadorArchivos {
 		BufferedReader br = null;
 
 		Promocion[] promociones = null;
+		PromocionPorcentual[] promocionPorcentual = null;
 
 		try {
 			archivo = new File("entrada/promociones.txt");
@@ -116,7 +116,7 @@ public abstract class ManejadorArchivos {
 			br = new BufferedReader(fr);
 
 			int cantidad = Integer.parseInt(br.readLine());
-			promociones = new Promocion[cantidad];
+			promocionPorcentual = new PromocionPorcentual[cantidad];
 			int indice = 0;
 
 			String linea = br.readLine();
@@ -129,11 +129,12 @@ public abstract class ManejadorArchivos {
 
 				String[] datosAtracciones = datosPromociones[3].split(";");
 				Atraccion[] atracciones = new Atraccion[datosAtracciones.length];
-//				Atraccion atraccion1 = Atraccion.getAtraccionPorNombre(datosAtracciones[0]);
-//				Atraccion atraccion2 = Atraccion.getAtraccionPorNombre(datosAtracciones[1]);
+				atracciones[0] = Atraccion.getAtraccionPorNombre(datosAtracciones[0]);
+				atracciones[1] = Atraccion.getAtraccionPorNombre(datosAtracciones[1]);
+				
 
 				if (Id == "porcentual") {
-					promociones[indice++] = new PromocionPorcentual(tipo, descuento, atracciones);
+					promocionPorcentual[indice++] = new PromocionPorcentual(tipo, descuento, atracciones);
 				} else if (Id == "absoluta") {
 					promociones[indice++] = new PromocionAbsoluta(tipo, descuento, atracciones);
 				} else if (Id == "AxB") {
@@ -143,7 +144,7 @@ public abstract class ManejadorArchivos {
 				linea = br.readLine();
 			}
 
-			return promociones;
+			return promocionPorcentual;
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -158,7 +159,7 @@ public abstract class ManejadorArchivos {
 			}
 		}
 
-		return promociones;
+		return promocionPorcentual;
 	}
 
 }

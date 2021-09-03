@@ -34,7 +34,7 @@ public abstract class Promocion {
 
 	@Override
 	public String toString() {
-		return "Promocion [Id=" + id + ", tipo=" + tipo + ", atracciones=" + Arrays.toString(atracciones)
-				+ ", costoTotal=" + costoTotal + "]";
+		return "Promocion [Id = " + id + ", tipo = " + tipo + ", atracciones = " + Arrays.toString(atracciones)
+				+ ", costoTotal = " + costoTotal + "]";
 	}
 }

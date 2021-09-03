@@ -17,5 +17,12 @@ public class PromocionAxB extends Promocion {
 	@Override
 	public void calculoPromocion() {
 		super.costoTotal = (atracciones[0].getCosto() + atracciones[1].getCosto());		
+	}
+
+	@Override
+	public String toString() {
+		return "PromocionAxB [atraccionGratis=" + atraccionGratis + "]";
 	}	
+	
+	
 }
