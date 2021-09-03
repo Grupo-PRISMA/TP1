@@ -41,11 +41,13 @@ public class Atraccion {
 				+ ", Cupo Personas = " + cupoPersonas + "\n";
 	}
 
-//	public static Atracciones getAtraccionPorNombre(String nombre) {
-//		if (){
-//			
-//		}
-//		return Atraccion;
-//	}
-//	
+	public static Atraccion getAtraccionPorNombre(String descuento) {
+		for (Atraccion atraccion : ManejadorArchivos.obtenerAtraccionesDesdeArchivo()) {
+			if (atraccion.getNombre().equals(descuento)) {
+				return atraccion;
+			}
+		}
+		return null;
+	}
+
 }

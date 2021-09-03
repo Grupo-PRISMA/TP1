@@ -17,6 +17,6 @@ public class PromocionAbsoluta extends Promocion {
 
 	@Override
 	public void calculoPromocion() {
-		costoTotal = descuentoDouble;		
+		costoTotal =(atracciones[0].getCosto() + atracciones[1].getCosto()) - descuentoDouble;
 	}	
 }

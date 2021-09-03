@@ -1,4 +1,4 @@
 3
 porcentual,aventura,0.2,Bosque Negro;Mordor
-absoluta,degustacion,36,Lothlorien;La Comarca
+absoluta,degustacion,3,Lothlorien;La Comarca
 AxB,paisajes,Erebor,Minas Tirith;Abismo de Helm

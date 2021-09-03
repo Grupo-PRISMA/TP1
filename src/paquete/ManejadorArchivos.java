@@ -121,15 +121,23 @@ public abstract class ManejadorArchivos {
 			while (linea != null) {
 				String[] datosPromociones = linea.split(",");
 
-				TipoDeAtraccion tipo = TipoDeAtraccion.valueOf(datosPromociones[0]);
-				String nombreDescuento = datosPromociones[1];
+				String Id = datosPromociones[0];
+				TipoDeAtraccion tipoDeAtraccion = TipoDeAtraccion.valueOf(datosPromociones[1]);
+				String descuento = datosPromociones[2];
 
-				String[] datosAtracciones = datosPromociones[2].split(";");
+				String[] datosAtracciones = datosPromociones[3].split(";");
 				Atraccion[] atracciones = new Atraccion[datosAtracciones.length];
 //				Atraccion atraccion1 = Atraccion.getAtraccionPorNombre(datosAtracciones[0]);
 //				Atraccion atraccion2 = Atraccion.getAtraccionPorNombre(datosAtracciones[1]);
 
-				promociones[indice++] = new Promocion(tipo, nombreDescuento, atracciones);
+				if (Id == "porcentual") {
+					promociones[indice++] = new PromocionPorcentual(tipoDeAtraccion, descuento, atracciones);
+				} else if (Id == "absoluta") {
+					promociones[indice++] = new PromocionAbsoluta(tipoDeAtraccion, descuento, atracciones);
+				} else if (Id == "AxB") {
+					promociones[indice++] = new PromocionAxB(tipoDeAtraccion, descuento, atracciones, descuento);
+				}
+
 				linea = br.readLine();
 			}
 
