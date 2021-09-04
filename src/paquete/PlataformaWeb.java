@@ -31,7 +31,7 @@ public class PlataformaWeb {
 		}
 		return null;
 	}
-	
+
 	private Promocion obtenerPromocionPorTipo(TipoDeAtraccion tipoDeAtraccionPreferida) {
 		for (Promocion promocion : promociones) {
 			if (promocion.getTipo().equals(tipoDeAtraccionPreferida)) {
@@ -40,25 +40,33 @@ public class PlataformaWeb {
 		}
 		return null;
 	}
-	
-	
-	
+
 	@Override
 	public String toString() {
 		return "Carga:\n" + "Visitantes:\n" + Arrays.toString(visitantes) + "\n" + "Atracciones:\n"
 				+ Arrays.toString(atracciones) + "\n" + "Promociones:\n" + Arrays.toString(promociones) + "\n";
 	}
-	
+
 	public Sugerencia[] crearSugerencia(Visitante[] visitantes, Atraccion[] atracciones, Promo[] promociones) {
 		for (Visitante visitante : visitantes) {
+			int i = 0;
 			TipoDeAtraccion tipoDeAtraccionPreferida = visitante.getPreferencia();
 			Promocion promo = obtenerPromocionPorTipo(tipoDeAtraccionPreferida);
-			Sugerencia sugerencia = new Sugerencia(promo.getAtracciones(), promo.getCostoTotal(), promo.getDuracionHs());
-		}
-		
-		return null;
-		
-	}
+			Sugerencia sugerencia = new Sugerencia(promo.getAtracciones(), promo.getCostoTotal(),
+					promo.getDuracionHs());
 
+			while (visitante.tienePresupuesto() && visitante.tieneHs()) {
+				if (visitante.getPresupuesto() >= promo.getCostoTotal()
+						&& visitante.getTiempoDisponibleHs() >= promo.getDuracionHs()
+						&& promo.getAtracciones()[0].getCupoPersonas() >= 0) {
+
+				}
+				visitante.aceptaSugerencia(sugerencia);
+			}
+
+		}
+
+		return null;
+	}
 
 }

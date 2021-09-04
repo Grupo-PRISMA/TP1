@@ -32,6 +32,14 @@ public abstract class Promocion {
 		return this.costoTotal;
 	}
 	
+	public double getDuracionHs() {
+		double duracionHs = 0;
+		for (Atraccion atraccion : this.atracciones) {
+			duracionHs += atraccion.getDuracionHs();
+		}
+		return duracionHs;
+	}
+	
 	public abstract void calculoPromocion();
 
 	@Override
@@ -39,7 +47,4 @@ public abstract class Promocion {
 		return "Promocion [Id = " + id + ", tipo = " + tipo + ", atracciones = " + Arrays.toString(atracciones)
 				+ ", costoTotal = " + costoTotal + "]";
 	}
-
-	protected abstract double getDuracionHs();
-	
 }

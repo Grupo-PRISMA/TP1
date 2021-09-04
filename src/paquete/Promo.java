@@ -9,10 +9,4 @@ public class Promo extends Promocion {
 	@Override
 	public void calculoPromocion() {
 	}
-
-	@Override
-	protected double getDuracionHs() {
-		return 0;
-	}
-
 }
