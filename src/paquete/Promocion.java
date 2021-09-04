@@ -7,11 +7,13 @@ public abstract class Promocion {
 	protected TipoDeAtraccion tipo;
 	protected Atraccion[] atracciones;
 	protected double costoTotal;
+	protected double duracionHs;
 
 	public Promocion(TipoDeAtraccion tipo, Atraccion[] atracciones) {
 		this.tipo = tipo;
 		this.atracciones = atracciones;
 		this.costoTotal = 0;
+		this.duracionHs = 0;
 	}
 
 	public String getId() {
@@ -37,4 +39,7 @@ public abstract class Promocion {
 		return "Promocion [Id = " + id + ", tipo = " + tipo + ", atracciones = " + Arrays.toString(atracciones)
 				+ ", costoTotal = " + costoTotal + "]";
 	}
+
+	protected abstract double getDuracionHs();
+	
 }

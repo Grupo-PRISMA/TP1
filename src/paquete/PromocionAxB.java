@@ -21,7 +21,7 @@ public class PromocionAxB extends Promo {
 
 	@Override
 	public String toString() {
-		return "Tipo = " + id + "\tTipo de Atracción = " + tipo + "\tAtracción Gratis = " + atraccionGratis.getNombre() + "\tAtracciones = " + atracciones[0].getNombre() + ", " + atracciones[1].getNombre()+"\n";
+		return "Tipo = " + id + "\tTipo de Atraccion = " + tipo + "\tAtraccion Gratis = " + atraccionGratis.getNombre() + "\tAtracciones = " + atracciones[0].getNombre() + ", " + atracciones[1].getNombre()+"\n";
 		
 	}	
 	

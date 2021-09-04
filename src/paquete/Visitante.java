@@ -38,7 +38,7 @@ public class Visitante {
 	public boolean aceptaSugerencia(Sugerencia sugerencia) {
 		char respuesta;
 		Scanner entradaEscaner = new Scanner(System.in);
-		System.out.println("Â¿Acepta sugerencia? (S/N)");
+		System.out.println("¿Acepta sugerencia? (S/N)");
 		respuesta = entradaEscaner.nextLine().charAt(0);
 		entradaEscaner.close();
 		sugerencia.setAceptada(Character.toUpperCase(respuesta) == 'S');
@@ -49,8 +49,8 @@ public class Visitante {
 
 	@Override
 	public String toString() {
-		return "Visitante [Nombre = " + nombre + ", Presupuesto = " + presupuesto + ", Tiempo Disponible Hs = "
-				+ tiempoDisponibleHs + ", Preferencia = " + preferencia + "]";
+		return "Nombre = " + nombre + ", Presupuesto = " + presupuesto + ", Tiempo Disponible Hs = "
+				+ tiempoDisponibleHs + ", Preferencia = " + preferencia + "\n";
 	}
 
 }

@@ -32,9 +32,33 @@ public class PlataformaWeb {
 		return null;
 	}
 	
+	private Promocion obtenerPromocionPorTipo(TipoDeAtraccion tipoDeAtraccionPreferida) {
+		for (Promocion promocion : promociones) {
+			if (promocion.getTipo().equals(tipoDeAtraccionPreferida)) {
+				return promocion;
+			}
+		}
+		return null;
+	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Carga:\n" + "Visitantes:\n" + Arrays.toString(visitantes) + "\n" + "Atracciones:\n"
 				+ Arrays.toString(atracciones) + "\n" + "Promociones:\n" + Arrays.toString(promociones) + "\n";
 	}
+	
+	public Sugerencia[] crearSugerencia(Visitante[] visitantes, Atraccion[] atracciones, Promo[] promociones) {
+		for (Visitante visitante : visitantes) {
+			TipoDeAtraccion tipoDeAtraccionPreferida = visitante.getPreferencia();
+			Promocion promo = obtenerPromocionPorTipo(tipoDeAtraccionPreferida);
+			Sugerencia sugerencia = new Sugerencia(promo.getAtracciones(), promo.getCostoTotal(), promo.getDuracionHs());
+		}
+		
+		return null;
+		
+	}
+
+
 }

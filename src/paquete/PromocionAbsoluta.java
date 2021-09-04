@@ -18,7 +18,7 @@ public class PromocionAbsoluta extends Promo {
 
 	@Override
 	public String toString() {
-		return "Tipo = " + id + "\tTipo de Atracción = " + tipo + "\tDescuento = " + descuento + "\tAtracciones = " + atracciones[0].getNombre() + ", " + atracciones[1].getNombre()+"\n";
+		return "Tipo = " + id + "\tTipo de Atraccion = " + tipo + "\tDescuento = " + descuento + "\tAtracciones = " + atracciones[0].getNombre() + ", " + atracciones[1].getNombre()+"\n";
 	}
 	
 	
