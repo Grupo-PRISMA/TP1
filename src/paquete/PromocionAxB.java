@@ -1,12 +1,12 @@
 package paquete;
 
-public class PromocionAxB extends Promocion {
+public class PromocionAxB extends Promo {
 	private static final String ID = "AxB";
 	private Atraccion atraccionGratis;
 
-	public PromocionAxB(TipoDeAtraccion tipo, String descuento, Atraccion[] atracciones) {
+	public PromocionAxB(TipoDeAtraccion tipo, Atraccion atraccionGratis, Atraccion[] atracciones) {
 		super(tipo, atracciones);
-		this.atraccionGratis = Atraccion.getAtraccionPorNombre(descuento);
+		this.atraccionGratis = atraccionGratis;
 		super.id = PromocionAxB.ID;
 	}
 		
@@ -21,7 +21,8 @@ public class PromocionAxB extends Promocion {
 
 	@Override
 	public String toString() {
-		return "PromocionAxB [atraccionGratis=" + atraccionGratis + "]";
+		return "Tipo = " + id + "\tTipo de Atracción = " + tipo + "\tAtracción Gratis = " + atraccionGratis.getNombre() + "\tAtracciones = " + atracciones[0].getNombre() + ", " + atracciones[1].getNombre()+"\n";
+		
 	}	
 	
 	

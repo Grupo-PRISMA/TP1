@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 public abstract class ManejadorArchivos {
 	public static Visitante[] obtenerVisitantesDesdeArchivo() {
@@ -107,8 +108,9 @@ public abstract class ManejadorArchivos {
 		FileReader fr = null;
 		BufferedReader br = null;
 
-		Promocion[] promociones = null;
-		PromocionPorcentual[] promocionPorcentual = null;
+		// PromocionAbsoluta[] promocionAbsoluta = null;
+		// PromocionAxB[] promocionAxB = null;
+		Promo[] promocion = null;
 
 		try {
 			archivo = new File("entrada/promociones.txt");
@@ -116,35 +118,58 @@ public abstract class ManejadorArchivos {
 			br = new BufferedReader(fr);
 
 			int cantidad = Integer.parseInt(br.readLine());
-			promocionPorcentual = new PromocionPorcentual[cantidad];
-			int indice = 0;
 
+			promocion = new Promo[cantidad];
+			// promocion = new PromocionPorcentual[cantidad];
+			// promocionAbsoluta = new PromocionAbsoluta[cantidad];
+			// promocionAxB = new PromocionAxB[cantidad];
+
+			int indice = 0;
+			double descuento = 0;
+			Atraccion descuento2 = null;
+
+			//expresion regular, compara un string si cumple con determinado patron, en este caos número
+			Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 			String linea = br.readLine();
 			while (linea != null) {
 				String[] datosPromociones = linea.split(",");
 
-				String Id = datosPromociones[0];
+				String id = datosPromociones[0];
 				TipoDeAtraccion tipo = TipoDeAtraccion.valueOf(datosPromociones[1]);
-				String descuento = datosPromociones[2];
+
+				if (pattern.matcher(datosPromociones[2]).matches()) {
+					descuento = Double.parseDouble(datosPromociones[2]);
+				} else {
+					descuento2 = buscarAtraccion(datosPromociones[2]);
+				}
 
 				String[] datosAtracciones = datosPromociones[3].split(";");
 				Atraccion[] atracciones = new Atraccion[datosAtracciones.length];
-				atracciones[0] = Atraccion.getAtraccionPorNombre(datosAtracciones[0]);
-				atracciones[1] = Atraccion.getAtraccionPorNombre(datosAtracciones[1]);
-				
+				Atraccion[] a = obtenerAtraccionesDesdeArchivo();
 
-				if (Id == "porcentual") {
-					promocionPorcentual[indice++] = new PromocionPorcentual(tipo, descuento, atracciones);
-				} else if (Id == "absoluta") {
-					promociones[indice++] = new PromocionAbsoluta(tipo, descuento, atracciones);
-				} else if (Id == "AxB") {
-					promociones[indice++] = new PromocionAxB(tipo, descuento, atracciones);
+				int i = 0, j = 0, x = 0;
+				for (i = 0; i < a.length; i++) {
+					for (j = 0; j < datosAtracciones.length; j++) {
+						if (a[i].getNombre().equals(datosAtracciones[j])) {
+							atracciones[x] = a[i];
+							x++;
+							//System.out.println(a[i]);
+							j = datosAtracciones.length;
+						}
+					}
+				}
+				//System.out.println("----------------------");
+
+				if (id.equals("porcentual")) {
+					promocion[indice++] = new PromocionPorcentual(tipo, descuento, atracciones);
+				} else if (id.equals("absoluta")) {
+					promocion[indice++] = new PromocionAbsoluta(tipo, descuento, atracciones);
+				} else if (id.equals("AxB")) {
+					promocion[indice++] = new PromocionAxB(tipo, descuento2, atracciones);
 				}
 
 				linea = br.readLine();
 			}
-
-			return promocionPorcentual;
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -159,7 +184,23 @@ public abstract class ManejadorArchivos {
 			}
 		}
 
-		return promocionPorcentual;
+		return promocion;
+	}
+
+	public static Atraccion buscarAtraccion(String atraccion) {
+		Atraccion[] a = obtenerAtraccionesDesdeArchivo();
+		Atraccion atraccionEncontrada = null;
+		int i = 0;
+
+		while (i < a.length && atraccionEncontrada == null) {
+			if (a[i].getNombre().equals(atraccion)) {
+				atraccionEncontrada = a[i];
+			} else {
+				i++;
+			}
+		}
+
+		return atraccionEncontrada;
 	}
 
 }

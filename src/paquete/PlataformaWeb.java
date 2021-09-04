@@ -32,8 +32,6 @@ public class PlataformaWeb {
 		return null;
 	}
 	
-	
-
 	@Override
 	public String toString() {
 		return "Carga:\n" + "Visitantes:\n" + Arrays.toString(visitantes) + "\n" + "Atracciones:\n"
