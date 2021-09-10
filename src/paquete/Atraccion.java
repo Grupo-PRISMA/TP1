@@ -38,7 +38,7 @@ public class Atraccion implements Comparable<Atraccion> {
 	@Override
 	public String toString() {
 		return "Nombre = " + nombre + ", Tipo = " + tipo + ", Costo = " + costo + ", Duracion en Horas = " + duracionHs
-				+ ", Cupo Personas = " + cupoPersonas;
+				+ ", Cupo Personas = " + cupoPersonas + "\n";
 	}
 
 	@Override

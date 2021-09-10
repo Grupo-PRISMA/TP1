@@ -17,78 +17,52 @@ public class PlataformaWeb {
 		this.promociones = manejadorArchivos.getPromociones();
 	}
 
-	/*public Atraccion obtenerAtraccionesPorTipo(TipoDeAtraccion tipo) {
-		for (Atraccion atraccion : atracciones) {
-			if (atraccion.getTipo().equals(tipo)) {
-				return atraccion;
-			}
-		}
-		return null;
-	}
-
-	private Promocion obtenerPromocionPorTipo(TipoDeAtraccion tipoDeAtraccionPreferida) {
-		for (Promocion promocion : promociones) {
-			if (promocion.getTipo().equals(tipoDeAtraccionPreferida)) {
-				return promocion;
-			}
-		}
-		return null;
-	}*/
-	/*
-	public Sugerencia sugerirPromocion(Visitante visitante) {  
-		Sugerencia sugerencia = null;
-		
-		for(Promocion promo : this.promociones) {
-			if(promo.getTipo() == visitante.getPreferencia()) {
-				if(promo.costoTotal <= visitante.getPresupuesto()) {
-					if(promo.duracionHs <= visitante.getTiempoDisponibleHs()) {
-						sugerencia = new Sugerencia (promo, null, promo.costoTotal, promo.duracionHs);
-						//visitante.aceptarSugerencia(sugerencia); 
-					}
-				}
-			}
-		}
-
-		
-		return sugerencia;
-	}
-
-	public Atraccion [] getAtracciones() {
-		return this.atracciones;
-	}
-	*/
-	
-	
-	
-	
-
-	/*public Sugerencia[] crearSugerencia(Visitante[] visitantes, Atraccion[] atracciones, Promo[] promociones) {
+	public Sugerencia[] crearSugerencia(ArrayList<Visitante> visitantes, ArrayList<Atraccion> atracciones, ArrayList<Promocion> promociones) {
 		for (Visitante visitante : visitantes) {
-			int i = 0;
 			TipoDeAtraccion tipoDeAtraccionPreferida = visitante.getPreferencia();
-			Promocion promo = obtenerPromocionPorTipo(tipoDeAtraccionPreferida);
-			Sugerencia sugerencia = new Sugerencia(promo.getAtracciones(), promo.getCostoTotal(),
-					promo.getDuracionHs());
-
-			while (visitante.tienePresupuesto() && visitante.tieneHs()) {
-				if (visitante.getPresupuesto() >= promo.getCostoTotal()
-						&& visitante.getTiempoDisponibleHs() >= promo.getDuracionHs()
-						&& promo.getAtracciones()[0].getCupoPersonas() >= 0) {
-
-				}
-				visitante.aceptaSugerencia(sugerencia);
+			
+			for(int i = 0; i < promociones.size(); i++) {
+				if(tipoDeAtraccionPreferida == promociones.get(i).getTipo() && promociones.get(i).tieneCupo()) {
+					if(visitante.getPresupuesto() >= promociones.get(i).getCostoTotal() && visitante.getTiempoDisponibleHs() >= promociones.get(i).getDuracionTotal()) {
+						boolean respuesta = visitante.aceptaSugerenciaPromocion(promociones.get(i));
+					}
+				}	
 			}
-
+			
+			for(int i = 0; i < atracciones.size(); i++) {
+				if(tipoDeAtraccionPreferida == atracciones.get(i).getTipo() && atracciones.get(i).getCupoPersonas() > 0) {
+					if(visitante.getPresupuesto() >= atracciones.get(i).getCosto() && visitante.getTiempoDisponibleHs() >= atracciones.get(i).getDuracion()) {
+						boolean respuesta = visitante.aceptaSugerenciaAtraccion(atracciones.get(i));
+					}
+				}	
+			}
+			
+			for(int i = 0; i < promociones.size(); i++) {
+				if(tipoDeAtraccionPreferida != promociones.get(i).getTipo() && promociones.get(i).tieneCupo()) {
+					if(visitante.getPresupuesto() >= promociones.get(i).getCostoTotal() && visitante.getTiempoDisponibleHs() >= promociones.get(i).getDuracionTotal()) {
+						//visitante.aceptaSugerencia(promocion.get(i));
+					}
+				}	
+			}
+			
+			for(int i = 0; i < atracciones.size(); i++) {
+				if(tipoDeAtraccionPreferida != atracciones.get(i).getTipo() && atracciones.get(i).getCupoPersonas() > 0) {
+					if(visitante.getPresupuesto() >= atracciones.get(i).getCosto() && visitante.getTiempoDisponibleHs() >= atracciones.get(i).getDuracion()) {
+						//visitante.aceptaSugerencia(atraccion.get(i));
+					}
+				}	
+			}
+			
 		}
+			
+
 
 		return null;
-	}*/
-	
-
+	}
 
 	@Override
 	public String toString() {
-		return "Carga:\n" + "Visitantes:\n" + visitantes + "\n" + "Atracciones:\n"
-				+ atracciones + "\n" + "Promociones:\n" + promociones + "\n";
+		return "Carga:\n" + "Visitantes:\n" + visitantes + "\n" + "Atracciones:\n" + atracciones + "\n"
+				+ "Promociones:\n" + promociones + "\n";
 	}
 }

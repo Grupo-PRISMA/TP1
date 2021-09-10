@@ -18,12 +18,23 @@ public class PromocionAxB extends Promocion {
 		return super.getDuracionTotal() + this.atraccionGratis.getDuracion();
 	}
 
-/*
+
 	@Override
 	public String toString() {
-		return "Tipo = " + id + "\tTipo de Atraccion = " + tipo + "\tAtraccion Gratis = " + atraccionGratis.getNombre()
-				+ "\tAtracciones = " + atracciones[0].getNombre() + ", " + atracciones[1].getNombre() + "\n";
+		return "Tipo de Atraccion = " + tipo + "\tAtraccion Gratis = " + atraccionGratis.getNombre()
+				+ "\nAtracciones = " + atracciones + "\n";
 
 	}
-*/
+	
+	@Override	
+	public boolean tieneCupo() {
+		int contador = 0;
+		for(int i = 0; i < super.atracciones.size(); i++) {
+			if (super.atracciones.get(i).getCupoPersonas() > 0) {
+				contador++;
+			}
+		}
+		
+		return contador == super.atracciones.size() && this.atraccionGratis.getCupoPersonas() > 0;
+	}
 }

@@ -14,11 +14,23 @@ public class PromocionAbsoluta extends Promocion {
 		return this.descuento;
 	}
 
-/*
+
 	@Override
 	public String toString() {
-		return "Tipo = " + id + "\tTipo de Atraccion = " + tipo + "\tDescuento = " + descuento + "\tAtracciones = "
-				+ atracciones[0].getNombre() + ", " + atracciones[1].getNombre() + "\n";
+		return "Tipo de Atraccion = " + tipo + "\tDescuento = " + descuento + "\nAtracciones = "
+				+ atracciones + "\n";
 	}
-*/
+	
+	@Override	
+	public boolean tieneCupo() {
+		int contador = 0;
+		for(int i = 0; i < super.atracciones.size(); i++) {
+			if (super.atracciones.get(i).getCupoPersonas() > 0) {
+				contador++;
+			}
+		}
+		
+		return contador == super.atracciones.size();
+	}
+
 }

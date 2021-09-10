@@ -35,14 +35,16 @@ public class Visitante {
 		return this.tiempoDisponibleHs;
 	}
 
-	public boolean aceptaSugerencia(Sugerencia sugerencia) {
+	public boolean aceptaSugerenciaPromocion(Promocion promo) {
 		char respuesta;
 		Scanner entradaEscaner = new Scanner(System.in);
 		System.out.println("Acepta sugerencia? (S/N)");
 		respuesta = entradaEscaner.nextLine().charAt(0);
 		entradaEscaner.close();
-		sugerencia.setAceptada(Character.toUpperCase(respuesta) == 'S');
-		this.itinerario.add(sugerencia);
+		//promo.setAceptada(Character.toUpperCase(respuesta) == 'S');
+		if(Character.toUpperCase(respuesta) == 'S') {
+			this.itinerario.add(sugerencia);	
+		}
 
 		return Character.toUpperCase(respuesta) == 'S';
 	}

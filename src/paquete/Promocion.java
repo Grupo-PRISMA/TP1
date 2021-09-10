@@ -46,6 +46,8 @@ public abstract class Promocion
 
 	public abstract double getDescuento();
 
+	public abstract boolean tieneCupo();
+
 	/*
 	@Override
 	public String toString() {

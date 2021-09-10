@@ -5,11 +5,18 @@ import java.util.Collections;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("holis");
 		
 		PlataformaWeb plataforma = new PlataformaWeb();
 
 		System.out.println(plataforma);
+		
+		
+		
+		
+		/*plataforma.presetacion()
+		plataforma.ofrecerSugerencia(Visitante)*/
+		
+		
 		/*
 		PlataformaWeb carga = new PlataformaWeb();
 
