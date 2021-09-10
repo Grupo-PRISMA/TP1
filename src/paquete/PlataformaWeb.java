@@ -1,29 +1,23 @@
 package paquete;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class PlataformaWeb {
-	private Visitante[] visitantes;
-	private Atraccion[] atracciones;
-	private Promocion[] promociones;
+	private ArrayList<Atraccion> atracciones;
+	private ArrayList<Visitante> visitantes;
+	private ArrayList<Promocion> promociones;
 
 	public PlataformaWeb() {
+		ManejadorArchivos manejadorArchivos = new ManejadorArchivos();
 
+		this.atracciones = manejadorArchivos.getAtracciones();
+		this.visitantes = manejadorArchivos.getVisitantes();
+		this.promociones = manejadorArchivos.getPromociones();
 	}
 
-	public void construirVisitantes(Visitante[] visitantes) {
-		this.visitantes = visitantes;
-	}
-
-	public void construirAtracciones(Atraccion[] atracciones) {
-		this.atracciones = atracciones;
-	}
-
-	public void construirPromociones(Promocion[] promociones) {
-		this.promociones = promociones;
-	}
-
-	public Atraccion obtenerAtraccionesPorTipo(TipoDeAtraccion tipo) {
+	/*public Atraccion obtenerAtraccionesPorTipo(TipoDeAtraccion tipo) {
 		for (Atraccion atraccion : atracciones) {
 			if (atraccion.getTipo().equals(tipo)) {
 				return atraccion;
@@ -39,15 +33,36 @@ public class PlataformaWeb {
 			}
 		}
 		return null;
+	}*/
+	/*
+	public Sugerencia sugerirPromocion(Visitante visitante) {  
+		Sugerencia sugerencia = null;
+		
+		for(Promocion promo : this.promociones) {
+			if(promo.getTipo() == visitante.getPreferencia()) {
+				if(promo.costoTotal <= visitante.getPresupuesto()) {
+					if(promo.duracionHs <= visitante.getTiempoDisponibleHs()) {
+						sugerencia = new Sugerencia (promo, null, promo.costoTotal, promo.duracionHs);
+						//visitante.aceptarSugerencia(sugerencia); 
+					}
+				}
+			}
+		}
+
+		
+		return sugerencia;
 	}
 
-	@Override
-	public String toString() {
-		return "Carga:\n" + "Visitantes:\n" + Arrays.toString(visitantes) + "\n" + "Atracciones:\n"
-				+ Arrays.toString(atracciones) + "\n" + "Promociones:\n" + Arrays.toString(promociones) + "\n";
+	public Atraccion [] getAtracciones() {
+		return this.atracciones;
 	}
+	*/
+	
+	
+	
+	
 
-	public Sugerencia[] crearSugerencia(Visitante[] visitantes, Atraccion[] atracciones, Promo[] promociones) {
+	/*public Sugerencia[] crearSugerencia(Visitante[] visitantes, Atraccion[] atracciones, Promo[] promociones) {
 		for (Visitante visitante : visitantes) {
 			int i = 0;
 			TipoDeAtraccion tipoDeAtraccionPreferida = visitante.getPreferencia();
@@ -67,6 +82,13 @@ public class PlataformaWeb {
 		}
 
 		return null;
-	}
+	}*/
+	
 
+
+	@Override
+	public String toString() {
+		return "Carga:\n" + "Visitantes:\n" + visitantes + "\n" + "Atracciones:\n"
+				+ atracciones + "\n" + "Promociones:\n" + promociones + "\n";
+	}
 }

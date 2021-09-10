@@ -11,7 +11,7 @@ public class Visitante {
 
 	private ArrayList<Sugerencia> itinerario;
 
-	public Visitante(String nombre, double presupuesto, double tiempoDisponibleHs, TipoDeAtraccion preferencia) {
+	public Visitante(String nombre, TipoDeAtraccion preferencia, double presupuesto, double tiempoDisponibleHs) {
 		this.nombre = nombre;
 		this.presupuesto = presupuesto;
 		this.tiempoDisponibleHs = tiempoDisponibleHs;

@@ -1,206 +1,359 @@
 package paquete;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.Collections;
 
-public abstract class ManejadorArchivos {
-	public static Visitante[] obtenerVisitantesDesdeArchivo() {
-		File archivo = null;
-		FileReader fr = null;
-		BufferedReader br = null;
+public class ManejadorArchivos {
 
-		Visitante[] visitantes = null;
+	private ArrayList<Atraccion> atracciones;
+	private ArrayList<Visitante> visitantes;
+	private ArrayList<Promocion> promociones;
+
+	public ManejadorArchivos() {
+		this.cargarAtracciones();
+		this.cargarPromociones();
+		this.cargarVisitantes();
+	}
+
+	public ArrayList<Promocion> getPromociones() {
+		return this.promociones;
+	}
+	
+	public ArrayList<Atraccion> getAtracciones() {
+		return this.atracciones;
+	}
+	
+	public ArrayList<Visitante> getVisitantes() {
+		return this.visitantes;
+	}
+
+	private void cargarAtracciones() {
+		ArrayList<String[]> datos = this.leerArchivo("entrada/atracciones.txt");
+		this.atracciones = this.generarAtracciones(datos);
+	}
+
+	private void cargarPromociones() {
+		ArrayList<String[]> datos = this.leerArchivo("entrada/promociones.txt");
+		this.promociones = this.generarPromociones(datos);
+	}
+
+	private void cargarVisitantes() {
+		ArrayList<String[]> datos = this.leerArchivo("entrada/visitantes.txt");
+		this.visitantes = this.generarVisitantes(datos);
+	}
+
+	private ArrayList<String[]> leerArchivo(String ruta) {
+		ArrayList<String[]> datos = new ArrayList<>();
 
 		try {
-			archivo = new File("entrada/visitantes.txt");
-			fr = new FileReader(archivo);
-			br = new BufferedReader(fr);
+			BufferedReader lector = new BufferedReader(new FileReader(new File(ruta)));
+			String linea;
 
-			int cantidad = Integer.parseInt(br.readLine());
-			visitantes = new Visitante[cantidad];
-			int indice = 0;
-			
-			String linea = br.readLine();
-			while (linea != null) {
-				String[] datosVisitantes = linea.split(",");
-
-				String nombre = datosVisitantes[0];
-				TipoDeAtraccion tipo = TipoDeAtraccion.valueOf(datosVisitantes[1]);
-				double presupuesto = Integer.parseInt(datosVisitantes[2]);
-				double tiempoDisponibleHs = Integer.parseInt(datosVisitantes[3]);
-
-				visitantes[indice++] = new Visitante(nombre, presupuesto, tiempoDisponibleHs, tipo);
-				linea = br.readLine();
+			while ((linea = lector.readLine()) != null) {
+				datos.add(linea.split(";"));
 			}
+		} catch (Exception e) {
+			System.out.println("ERROR!!!\n" + e.getMessage());
+		}
 
-			return visitantes;
+		return datos;
+	}
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (fr != null) {
-					fr.close();
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
+	private ArrayList<Atraccion> generarAtracciones(ArrayList<String[]> datos) {
+		ArrayList<Atraccion> atracciones = new ArrayList<>();
 
-			}
+		for (String[] datosAtraccion : datos) {
+			Atraccion atraccion = new Atraccion(
+				datosAtraccion[0],
+				TipoDeAtraccion.valueOf(datosAtraccion[1]),
+				Double.parseDouble(datosAtraccion[2]),
+				Double.parseDouble(datosAtraccion[3]),
+				Integer.parseInt(datosAtraccion[4])
+			);
+
+			atracciones.add(atraccion);
+		}
+		
+		Collections.sort(atracciones);
+		
+		return atracciones;
+	}
+
+	private ArrayList<Visitante> generarVisitantes(ArrayList<String[]> datos) {
+		ArrayList<Visitante> visitantes = new ArrayList<>();
+
+		for (String[] datosVisitante : datos) {
+			Visitante visitante = new Visitante(
+				datosVisitante[0],
+				TipoDeAtraccion.valueOf(datosVisitante[1]),
+				Double.parseDouble(datosVisitante[2]),
+				Double.parseDouble(datosVisitante[3])
+			);
+
+			visitantes.add(visitante);
 		}
 
 		return visitantes;
 	}
 
-	public static Atraccion[] obtenerAtraccionesDesdeArchivo() {
-		File archivo = null;
-		FileReader fr = null;
-		BufferedReader br = null;
+	private ArrayList<Promocion> generarPromociones(ArrayList<String[]> datos) {
+		ArrayList<Promocion> promociones = new ArrayList<>();
 
-		Atraccion[] atracciones = null;
+		for (String[] datosPromociones : datos) {
+			Promocion promocion;
+			String[] lista = this.getAtraccionesEnPromocion(datos); 
+			ArrayList<Atraccion> atracciones = this.buscarAtracciones(lista);
 
-		try {
-			archivo = new File("entrada/atracciones.txt");
-			fr = new FileReader(archivo);
-			br = new BufferedReader(fr);
-
-			int cantidad = Integer.parseInt(br.readLine());
-			atracciones = new Atraccion[cantidad];
-
-			int indice = 0;
-			String linea = br.readLine();
-			while (linea != null) {
-				String[] datosAtracciones = linea.split(",");
-
-				String nombre = datosAtracciones[0];
-				TipoDeAtraccion tipo = TipoDeAtraccion.valueOf(datosAtracciones[1]);
-				double costo = Double.parseDouble(datosAtracciones[2]);
-				double duracionHs = Double.parseDouble(datosAtracciones[3]);
-				int cupoPersonas = Integer.parseInt(datosAtracciones[4]);
-
-				atracciones[indice++] = new Atraccion(nombre, tipo, costo, duracionHs, cupoPersonas);
-				linea = br.readLine();
+			if (datosPromociones[0].equals(Promocion.TIPO_ABSOLUTA)) {
+				promocion = new PromocionAbsoluta(
+					TipoDeAtraccion.valueOf(datosPromociones[1]),
+					Double.parseDouble(datosPromociones[2]),
+					atracciones
+				);
+			} else if (datosPromociones[0].equals(Promocion.TIPO_PORCENTUAL)) {
+				promocion = new PromocionPorcentual(
+					TipoDeAtraccion.valueOf(datosPromociones[1]),
+					Double.parseDouble(datosPromociones[2]),
+					atracciones
+				);
+			} else {
+				promocion = new PromocionAxB(
+					TipoDeAtraccion.valueOf(datosPromociones[1]),
+					buscarAtraccion(datosPromociones[2]),
+					atracciones
+				);
 			}
 
-			return atracciones;
+			promociones.add(promocion);
+		}
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (fr != null) {
-					fr.close();
+		return promociones;
+	}
+
+	private String[] getAtraccionesEnPromocion(ArrayList<String[]> datos) {
+		String[] nombres = new String[0];
+
+		for (String[] dato : datos) {
+			nombres = new String[dato.length - 3];
+			for (int i = 3; i < dato.length; i++) {
+				nombres[i - 3] = dato[i];
+			}
+		}
+
+		return nombres;
+	}
+
+	private ArrayList<Atraccion> buscarAtracciones(String[] nombres) {
+		ArrayList<Atraccion> atracciones = new ArrayList<>();
+		int i = 0;
+
+		for (Atraccion atraccion : this.atracciones) {
+			for (String nombre : nombres) {
+				if (atraccion.getNombre().equals(nombre)) {
+					i++;
+					atracciones.add(atraccion);
+					break;
 				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
+			}
 
+			if (i == nombres.length) {
+				break;
 			}
 		}
 
 		return atracciones;
 	}
 
-	public static Promocion[] obtenerPromocionesDesdeArchivo() {
-		File archivo = null;
-		FileReader fr = null;
-		BufferedReader br = null;
+	private Atraccion buscarAtraccion(String nombre) {
+		String[] nombreArray = new String[1];
+		nombreArray[0] = nombre;
+		ArrayList<Atraccion> atracciones = this.buscarAtracciones(nombreArray);
 
-		// PromocionAbsoluta[] promocionAbsoluta = null;
-		// PromocionAxB[] promocionAxB = null;
-		Promo[] promocion = null;
+		return atracciones.isEmpty() ? null : atracciones.get(0);
+	}
+}
+
+/*
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+
+public final class ManejadorArchivos
+{
+	private static String RUTA_ARCHIVOS = "entrada"+ File.separator;
+	private static String ARCHIVO_ATRACCIONES = RUTA_ARCHIVOS + "atracciones.csv";
+	private static String ARCHIVO_VISITANTES = RUTA_ARCHIVOS + "visitantes.csv";
+	private static String ARCHIVO_PROMOCIONES = RUTA_ARCHIVOS + "promociones.csv";
+
+	private static ArrayList<Atraccion> atracciones = new ArrayList<>();
+	private static ArrayList<Visitante> visitantes = new ArrayList<>();
+	private static ArrayList<Promocion> promociones = new ArrayList<>();
+
+	public static void main(String[] args) // para testeo
+	{
+		ManejadorArchivos.cargarArchivos();
+		System.out.println(ManejadorArchivos.atracciones.get(0).getNombre()); // Moria. OK
+		System.out.println(ManejadorArchivos.visitantes.get(1).getNombre()); // Gandalf. OK
+		System.out.println(ManejadorArchivos.promociones.get(2).getTipo()); // Paisaje. OK
+	}
+
+	public static void cargarArchivos()
+	{
+		ManejadorArchivos.cargarAtracciones();
+		ManejadorArchivos.cargarPromociones();
+		ManejadorArchivos.cargarVisitantes();
+	}
+
+	private static void cargarAtracciones()
+	{
+		ArrayList<String[]> datos = ManejadorArchivos.leerArchivo(ARCHIVO_ATRACCIONES);
+		ManejadorArchivos.atracciones = ManejadorArchivos.generarAtracciones(datos);
+	}
+
+	private static void cargarPromociones() {
+		ArrayList<String[]> datos = ManejadorArchivos.leerArchivo(ARCHIVO_PROMOCIONES);
+		ManejadorArchivos.promociones = ManejadorArchivos.generarPromociones(datos);
+	}
+
+	private static void cargarVisitantes()
+	{
+		ArrayList<String[]> datos = ManejadorArchivos.leerArchivo(ARCHIVO_VISITANTES);
+		ManejadorArchivos.visitantes = ManejadorArchivos.generarVisitantes(datos);
+	}
+
+	private static ArrayList<String[]> leerArchivo(String ruta)
+	{
+		ArrayList<String[]> datos = new ArrayList<>();
 
 		try {
-			archivo = new File("entrada/promociones.txt");
-			fr = new FileReader(archivo);
-			br = new BufferedReader(fr);
+			BufferedReader lector = new BufferedReader(new FileReader(new File(ruta)));
+			String linea;
 
-			int cantidad = Integer.parseInt(br.readLine());
+			while ((linea = lector.readLine()) != null) {
+				datos.add(linea.split(";"));
+			}
+		} catch (Exception e) {
+			System.out.println("ERROR!!!\n" + e.getMessage());
+		}
 
-			promocion = new Promo[cantidad];
-			// promocion = new PromocionPorcentual[cantidad];
-			// promocionAbsoluta = new PromocionAbsoluta[cantidad];
-			// promocionAxB = new PromocionAxB[cantidad];
+		return datos;
+	}
 
-			int indice = 0;
-			double descuento = 0;
-			Atraccion descuento2 = null;
+	private static ArrayList<Atraccion> generarAtracciones(ArrayList<String[]> datos)
+	{
+		ArrayList<Atraccion> atracciones = new ArrayList<>();
 
-			//expresion regular, compara un string si cumple con determinado patron, en este caos número
-			Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
-			String linea = br.readLine();
-			while (linea != null) {
-				String[] datosPromociones = linea.split(",");
+		for (String[] datosAtraccion : datos) {
+			Atraccion atraccion = new Atraccion(
+				datosAtraccion[0],
+				TipoDeAtraccion.valueOf(datosAtraccion[1]),
+				Double.parseDouble(datosAtraccion[2]),
+				Double.parseDouble(datosAtraccion[3]),
+				Integer.parseInt(datosAtraccion[4])
+			);
 
-				String id = datosPromociones[0];
-				TipoDeAtraccion tipo = TipoDeAtraccion.valueOf(datosPromociones[1]);
+			atracciones.add(atraccion);
+		}
 
-				if (pattern.matcher(datosPromociones[2]).matches()) {
-					descuento = Double.parseDouble(datosPromociones[2]);
-				} else {
-					descuento2 = buscarAtraccion(datosPromociones[2]);
-				}
+		return atracciones;
+	}
 
-				String[] datosAtracciones = datosPromociones[3].split(";");
-				Atraccion[] atracciones = new Atraccion[datosAtracciones.length];
-				Atraccion[] a = obtenerAtraccionesDesdeArchivo();
+	private static ArrayList<Visitante> generarVisitantes(ArrayList<String[]> datos)
+	{
+		ArrayList<Visitante> visitantes = new ArrayList<>();
 
-				int i = 0, j = 0, x = 0;
-				for (i = 0; i < a.length; i++) {
-					for (j = 0; j < datosAtracciones.length; j++) {
-						if (a[i].getNombre().equals(datosAtracciones[j])) {
-							atracciones[x] = a[i];
-							x++;
-							//System.out.println(a[i]);
-							j = datosAtracciones.length;
-						}
-					}
-				}
-				//System.out.println("----------------------");
+		for (String[] datosVisitante : datos) {
+			Visitante visitante = new Visitante( // el orden de los campos en el archivo no coincide con el orden de los parametros del constructor -_-
+				datosVisitante[0],
+				Double.parseDouble(datosVisitante[2]),
+				Double.parseDouble(datosVisitante[3]),
+				TipoDeAtraccion.valueOf(datosVisitante[1])
+			);
 
-				if (id.equals("porcentual")) {
-					promocion[indice++] = new PromocionPorcentual(tipo, descuento, atracciones);
-				} else if (id.equals("absoluta")) {
-					promocion[indice++] = new PromocionAbsoluta(tipo, descuento, atracciones);
-				} else if (id.equals("AxB")) {
-					promocion[indice++] = new PromocionAxB(tipo, descuento2, atracciones);
-				}
+			visitantes.add(visitante);
+		}
 
-				linea = br.readLine();
+		return visitantes;
+	}
+
+	private static ArrayList<Promocion> generarPromociones(ArrayList<String[]> datos) {
+		ArrayList<Promocion> promociones = new ArrayList<>();
+
+		for (String[] datosPromociones : datos) {
+			Promocion promocion;
+			String[] lista = ManejadorArchivos.construirListaAtracciones(datos); // ver si java tiene algo para extraer una porcion de un array list
+			ArrayList<Atraccion> atracciones = ManejadorArchivos.buscarAtracciones(lista);
+
+			if (datosPromociones[0].equals(Promocion.TIPO_ABSOLUTA)) {
+				promocion = new PromocionAbsoluta(
+					TipoDeAtraccion.valueOf(datosPromociones[1]),
+					Double.parseDouble(datosPromociones[2]),
+					atracciones
+				);
+			} else if (datosPromociones[0].equals(Promocion.TIPO_PORCENTUAL)) {
+				promocion = new PromocionPorcentual(
+					TipoDeAtraccion.valueOf(datosPromociones[1]),
+					Double.parseDouble(datosPromociones[2]),
+					atracciones
+				);
+			} else {
+				promocion = new PromocionAxB(
+					TipoDeAtraccion.valueOf(datosPromociones[1]),
+					buscarAtraccion(datosPromociones[2]),
+					atracciones
+				);
 			}
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (fr != null) {
-					fr.close();
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
+			promociones.add(promocion);
+		}
 
+		return promociones;
+	}
+	private static String[] construirListaAtracciones(ArrayList<String[]> datos) {
+		String[] nombres = new String[0];
+
+		for (String[] dato : datos) {
+			nombres = new String[dato.length - 3];
+			for (int i = 3; i < dato.length; i++) {
+				nombres[i - 3] = dato[i];
 			}
 		}
 
-		return promocion;
+		return nombres;
 	}
 
-	public static Atraccion buscarAtraccion(String atraccion) {
-		Atraccion[] a = obtenerAtraccionesDesdeArchivo();
-		Atraccion atraccionEncontrada = null;
+	private static ArrayList<Atraccion> buscarAtracciones(String[] nombres) {
+		ArrayList<Atraccion> atracciones = new ArrayList<>();
 		int i = 0;
 
-		while (i < a.length && atraccionEncontrada == null) {
-			if (a[i].getNombre().equals(atraccion)) {
-				atraccionEncontrada = a[i];
-			} else {
-				i++;
+		for (Atraccion atraccion : ManejadorArchivos.atracciones) {
+			for (String nombre : nombres) {
+				if (atraccion.getNombre().equals(nombre)) {
+					i++;
+					atracciones.add(atraccion);
+					break;
+				}
+			}
+
+			if (i == nombres.length) {
+				break;
 			}
 		}
 
-		return atraccionEncontrada;
+		return atracciones;
 	}
 
+	private static Atraccion buscarAtraccion(String nombre) {
+		String[] nombreArray = new String[1];
+		nombreArray[0] = nombre;
+		ArrayList<Atraccion> atracciones = ManejadorArchivos.buscarAtracciones(nombreArray);
+
+		return atracciones.isEmpty() ? null : atracciones.get(0);
+	}
 }
+*/

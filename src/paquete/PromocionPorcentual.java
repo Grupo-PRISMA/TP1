@@ -1,26 +1,24 @@
 package paquete;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
-public class PromocionPorcentual extends Promo {
-	private static final String ID = "porcentual";
+public class PromocionPorcentual extends Promocion {
 	private double descuento;
 
-	public PromocionPorcentual(TipoDeAtraccion tipo, double descuento, Atraccion[] atracciones) {
+	public PromocionPorcentual(TipoDeAtraccion tipo, double descuento, ArrayList<Atraccion> atracciones) {
 		super(tipo, atracciones);
 		this.descuento = descuento;
-		super.id = PromocionPorcentual.ID;
 	}
 
-	@Override
-	public void calculoPromocion() {
-		super.costoTotal = (atracciones[0].getCosto() + atracciones[1].getCosto()) * descuento;
+	public double getDescuento() {
+		return super.getCostoTotal() * (this.descuento / 100);
 	}
 
+/*
 	@Override
 	public String toString() {
 		return "Tipo = " + id + "\tTipo de Atraccion = " + tipo + "\tDescuento = " + descuento + "\tAtracciones = "
 				+ atracciones[0].getNombre() + ", " + atracciones[1].getNombre() + "\n";
 	}
-
+*/
 }

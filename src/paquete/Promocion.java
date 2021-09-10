@@ -1,50 +1,56 @@
 package paquete;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
-public abstract class Promocion {
-	protected String id;
+public abstract class Promocion
+{
+	public static String TIPO_ABSOLUTA = "absoluta";
+	public static String TIPO_AxB = "AxB";
+	public static String TIPO_PORCENTUAL = "porcentual";
+	
 	protected TipoDeAtraccion tipo;
-	protected Atraccion[] atracciones;
-	protected double costoTotal;
-	protected double duracionHs;
+	protected ArrayList<Atraccion> atracciones = new ArrayList<>();
 
-	public Promocion(TipoDeAtraccion tipo, Atraccion[] atracciones) {
+	public Promocion(TipoDeAtraccion tipo, ArrayList<Atraccion> atracciones) {
 		this.tipo = tipo;
 		this.atracciones = atracciones;
-		this.costoTotal = 0;
-		this.duracionHs = 0;
-	}
-
-	public String getId() {
-		return id;
 	}
 
 	public TipoDeAtraccion getTipo() {
 		return this.tipo;
 	}
 
-	public Atraccion[] getAtracciones() {
+	public ArrayList<Atraccion> getAtracciones() {
 		return this.atracciones;
 	}
 	
 	public double getCostoTotal(){
-		return this.costoTotal;
-	}
-	
-	public double getDuracionHs() {
-		double duracionHs = 0;
-		for (Atraccion atraccion : this.atracciones) {
-			duracionHs += atraccion.getDuracionHs();
-		}
-		return duracionHs;
-	}
-	
-	public abstract void calculoPromocion();
+		double costoTotal = 0;
 
+		for (Atraccion atraccion : this.atracciones) {
+			costoTotal += atraccion.getCosto();
+		}
+
+		return costoTotal - this.getDescuento();
+	}
+	
+	public double getDuracionTotal() {
+		double duracionTotal = 0;
+
+		for (Atraccion atraccion : this.atracciones) {
+			duracionTotal += atraccion.getDuracion();
+		}
+
+		return duracionTotal;
+	}
+
+	public abstract double getDescuento();
+
+	/*
 	@Override
 	public String toString() {
 		return "Promocion [Id = " + id + ", tipo = " + tipo + ", atracciones = " + Arrays.toString(atracciones)
 				+ ", costoTotal = " + costoTotal + "]";
 	}
+	*/
 }

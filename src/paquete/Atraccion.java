@@ -1,6 +1,6 @@
 package paquete;
 
-public class Atraccion {
+public class Atraccion implements Comparable<Atraccion> {
 	private String nombre;
 	private TipoDeAtraccion tipo;
 	private double costo;
@@ -27,7 +27,7 @@ public class Atraccion {
 		return this.costo;
 	}
 
-	public double getDuracionHs() {
+	public double getDuracion() {
 		return this.duracionHs;
 	}
 
@@ -38,16 +38,27 @@ public class Atraccion {
 	@Override
 	public String toString() {
 		return "Nombre = " + nombre + ", Tipo = " + tipo + ", Costo = " + costo + ", Duracion en Horas = " + duracionHs
-				+ ", Cupo Personas = " + cupoPersonas + "\n";
+				+ ", Cupo Personas = " + cupoPersonas;
 	}
 
-	public static Atraccion getAtraccionPorNombre(String descuento) {
-		for (Atraccion atraccion : ManejadorArchivos.obtenerAtraccionesDesdeArchivo()) {
-			if (atraccion.getNombre().equals(descuento)) {
-				return atraccion;
+	@Override
+	public int compareTo(Atraccion otraAtraccion) {
+		int resultado = 0;
+
+		if (this.getCosto() > otraAtraccion.getCosto()) {
+			resultado = -1;
+		} else if (this.getCosto() < otraAtraccion.getCosto()) {
+			resultado = 1;
+		} else {
+			if (this.getDuracion() > otraAtraccion.getDuracion()) {
+				resultado = -1;
+			} else if (this.getDuracion() < otraAtraccion.getDuracion()) {
+				resultado = 1;
+			} else {
+				resultado = 0;
 			}
 		}
-		return null;
-	}
 
+		return resultado;
+	}
 }

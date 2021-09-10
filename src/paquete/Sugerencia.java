@@ -1,14 +1,21 @@
 package paquete;
 
+import java.util.ArrayList;
+
 public class Sugerencia {
 	
-	private Atraccion[] atracciones;
+	private Promocion promocion;
+	private Atraccion atraccion;
 	private double costo;
 	private double duracionHs;
 	private boolean aceptada;
 
-	public Sugerencia(Atraccion[] atracciones, double costo, double duracionHs) {
-		this.atracciones = atracciones;
+	
+	//revisar la existencia de la clase sugerencia
+	
+	public Sugerencia(Promocion promo, Atraccion atraccion, double costo, double duracionHs) {
+		this.promocion = promo;
+		this.atraccion = atraccion;
 		this.costo = costo;
 		this.duracionHs = duracionHs;
 		this.aceptada = false;
@@ -18,9 +25,18 @@ public class Sugerencia {
 		this.aceptada = aceptada;
 	}
 
+	public double getCosto() {
+		return costo;
+	}
+
+	public double getDuracionHs() {
+		return duracionHs;
+	}
+
 	@Override
 	public String toString() {
-		return "Sugerencia [nombre=" + atracciones + ", costo=" + costo + ", duracionHs=" + duracionHs + ", aceptada="
+		return "Sugerencia [nombre=" + atraccion + ", costo=" + costo + ", duracionHs=" + duracionHs + ", aceptada="
 				+ aceptada + "]";
 	}
+
 }

@@ -1,4 +1,3 @@
-3
-porcentual,AVENTURA,0.2,Bosque Negro;Mordor
-absoluta,DEGUSTACION,3,Lothlorien;La Comarca
-AxB,PAISAJE,Erebor,Minas Tirith;Abismo de Helm
+porcentual;AVENTURA;0.2;Bosque Negro;Mordor
+absoluta;DEGUSTACION;3;Lothlorien;La Comarca
+AxB;PAISAJE;Erebor;Minas Tirith;Abismo de Helm
