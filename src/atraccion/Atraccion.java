@@ -1,4 +1,4 @@
-package paquete;
+package atraccion;
 
 public class Atraccion implements Comparable<Atraccion> {
 	private String nombre;

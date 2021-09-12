@@ -1,6 +1,9 @@
-package paquete;
+package promociones;
 
 import java.util.ArrayList;
+
+import atraccion.Atraccion;
+import atraccion.TipoDeAtraccion;
 
 public class PromocionAbsoluta extends Promocion {
 	private double descuento;

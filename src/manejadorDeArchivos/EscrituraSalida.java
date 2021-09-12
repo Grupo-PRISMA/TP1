@@ -1,4 +1,4 @@
-package paquete;
+package manejadorDeArchivos;
 
 public class EscrituraSalida {
 

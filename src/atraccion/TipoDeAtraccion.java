@@ -1,4 +1,4 @@
-package paquete;
+package atraccion;
 
 public enum TipoDeAtraccion {
 

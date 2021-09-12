@@ -1,6 +1,9 @@
-package paquete;
+package visitante;
 
 import java.util.Scanner;
+
+import atraccion.TipoDeAtraccion;
+import sugerencia.Sugerencia;
 
 public class Visitante {
 	private String nombre;

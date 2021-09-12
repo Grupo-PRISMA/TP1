@@ -1,8 +1,12 @@
-package paquete;
+package plataformaWeb;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+
+import atraccion.Atraccion;
+import manejadorDeArchivos.ManejadorArchivos;
+import promociones.Promocion;
+import sugerencia.Sugerencia;
+import visitante.Visitante;
 
 public class PlataformaWeb {
 	private ArrayList<Atraccion> atracciones;
@@ -17,7 +21,7 @@ public class PlataformaWeb {
 		this.promociones = manejadorArchivos.getPromociones();
 	}
 	
-	private boolean validaRequisitos(Visitante visitante, /*TipoDeAtraccion tipo,*/ boolean cupo, double costo, double duracion) {
+	private boolean validaRequisitos(Visitante visitante, boolean cupo, double costo, double duracion) {
 		return cupo	&& visitante.getPresupuesto() >= costo && visitante.getTiempoDisponibleHs() >= duracion;
 	}
 	

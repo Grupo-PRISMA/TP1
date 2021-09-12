@@ -1,6 +1,9 @@
-package paquete;
+package sugerencia;
 
 import java.util.ArrayList;
+
+import atraccion.Atraccion;
+import promociones.Promocion;
 
 public class Sugerencia {
 	

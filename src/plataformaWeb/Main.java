@@ -1,4 +1,4 @@
-package paquete;
+package plataformaWeb;
 
 import java.util.Scanner;
 
