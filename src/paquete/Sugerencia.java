@@ -6,19 +6,19 @@ public class Sugerencia {
 	
 	private ArrayList<String> nombresAtracciones;
 	private double costo;
-	private double duracionHs;
+	private double duracion;
 	
 	public Sugerencia(Promocion promo) {
 		this.nombresAtracciones = this.extraerNombre(promo.getAtracciones());
 		this.costo = promo.getCostoTotal();
-		this.duracionHs = promo.getDuracionTotal();
+		this.duracion = promo.getDuracionTotal();
 	}
 	
 	public Sugerencia(Atraccion atraccion) {
 		this.nombresAtracciones = new ArrayList<>();
 		this.nombresAtracciones.add(atraccion.getNombre());
 		this.costo = atraccion.getCosto();
-		this.duracionHs = atraccion.getDuracion();
+		this.duracion = atraccion.getDuracion();
 	}
 	
 	private ArrayList<String> extraerNombre(ArrayList<Atraccion> atracciones) {
@@ -39,19 +39,21 @@ public class Sugerencia {
 		return this.costo;
 	}
 
-	public double getDuracionHs() {
-		return this.duracionHs;
+	public double getDuracion() {
+		return this.duracion;
 	}
 
 	@Override
 	public String toString() {
-		return "Sugerencia [costo=" + costo + ", duracionHs=" + duracionHs + "]";
+		return "Sugerencia [costo=" + costo + ", duracion=" + duracion + "]";
 	}
 
 	public boolean estaEn(ArrayList<Sugerencia> sugerencias) {
 		for(String nombre : this.nombresAtracciones) {
-			if (sugerencias.contains(nombre)) {
-				return true;
+			for(Sugerencia sugerencia : sugerencias) {
+				if (sugerencia.getNombresAtracciones().contains(nombre)) {
+					return true;
+				}
 			}
 		}
 		

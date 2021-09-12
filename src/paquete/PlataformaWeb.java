@@ -15,24 +15,10 @@ public class PlataformaWeb {
 		this.atracciones = manejadorArchivos.getAtracciones();
 		this.visitantes = manejadorArchivos.getVisitantes();
 		this.promociones = manejadorArchivos.getPromociones();
-		
-//		for (Promocion a : this.promociones) {
-//			System.out.println(a + "\n");
-//		}
-//		System.out.println(".........................");
 	}
-
-	/*private boolean validaRequisitos(Visitante visitante, Promocion promo) {
-		return promo.getTipo() == visitante.getPreferencia() && promo.tieneCupo()
-				&& visitante.getPresupuesto() >= promo.getCostoTotal()
-				&& visitante.getTiempoDisponibleHs() >= promo.getDuracionTotal();
-	}*/
 	
 	private boolean validaRequisitos(Visitante visitante, /*TipoDeAtraccion tipo,*/ boolean cupo, double costo, double duracion) {
-		return /*tipo == visitante.getPreferencia()
-				&&*/ cupo
-				&& visitante.getPresupuesto() >= costo
-				&& visitante.getTiempoDisponibleHs() >= duracion;
+		return cupo	&& visitante.getPresupuesto() >= costo && visitante.getTiempoDisponibleHs() >= duracion;
 	}
 	
 	private boolean validaRequisitosPromocionPreferencia(Visitante visitante, Promocion promocion) {
@@ -78,7 +64,6 @@ public class PlataformaWeb {
 	}
 	
 	private ArrayList<Sugerencia> crearSugerenciasConPreferencia(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
-		//ArrayList<Sugerencia> sugerencias;
 		sugerencias = this.crearSugerenciasPromocionesConPreferencias(visitante, sugerencias);
 		sugerencias = this.crearSugerenciasAtraccionesConPreferencias(visitante, sugerencias);
 		
@@ -188,14 +173,14 @@ public class PlataformaWeb {
 		return sugerencias;
 	}
 
-	public void mostrarItinerario(Visitante visitante, ArrayList<Sugerencia> itinerario) {
+	private void mostrarItinerario(Visitante visitante, ArrayList<Sugerencia> itinerario) {
 		double costoTotal = 0;
 		double duracionTotal = 0;
 	
 		for (Sugerencia sugerencia : itinerario) {
 			System.out.println(sugerencia);
 			costoTotal += sugerencia.getCosto();
-			duracionTotal += sugerencia.getDuracionHs();
+			duracionTotal += sugerencia.getDuracion();
 		}
 
 		System.out.println("Costo total= " + costoTotal + "\nDuración total= " + duracionTotal);

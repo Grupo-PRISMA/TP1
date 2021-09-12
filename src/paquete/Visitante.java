@@ -1,6 +1,5 @@
 package paquete;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Visitante {
@@ -40,22 +39,17 @@ public class Visitante {
 		do {
 			System.out.println("Acepta sugerencia? Ingrese S o N");
 			String a = entrada.nextLine();
-			System.out.println(a);
 			respuesta = a.charAt(0);
 			respuesta = Character.toUpperCase(respuesta);
 		} while (respuesta != 'S' && respuesta != 'N' && entrada.hasNextLine());
-		//System.out.println("fin do while");
-		//entrada.close();
-		//System.out.println("cierra scanner");
-		
-		//promo.setAceptada(Character.toUpperCase(respuesta) == 'S');
+
 		if(respuesta == 'S') {
 			this.presupuesto -= sugerencia.getCosto();
-			this.tiempoDisponibleHs -= sugerencia.getDuracionHs();
+			this.tiempoDisponibleHs -= sugerencia.getDuracion();
 		}
 		
 		return respuesta == 'S';
-		//return false;
+
 	}
 	
 	@Override
