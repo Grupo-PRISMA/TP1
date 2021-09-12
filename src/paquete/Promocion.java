@@ -46,13 +46,39 @@ public abstract class Promocion
 
 	public abstract double getDescuento();
 
-	public abstract boolean tieneCupo();
+	public boolean hayCupo() {
+		boolean hay = true;
+		
+		for (Atraccion atraccion : this.atracciones) {
+			hay &= atraccion.hayCupo();
+		}
+		
+		return hay;
+	}
 
-	/*
+	public void bajarCupo() {
+		for (Atraccion atraccion : this.atracciones) {
+			atraccion.bajarCupo();
+		}
+	}
+	
+	public ArrayList<String> nombreAtracciones() {
+		ArrayList<String> nombres = new ArrayList<String>();
+		
+		for (Atraccion atraccion : this.atracciones) {
+			nombres.add(atraccion.getNombre());
+		}
+		return nombres;
+	}
+	
+
 	@Override
 	public String toString() {
-		return "Promocion [Id = " + id + ", tipo = " + tipo + ", atracciones = " + Arrays.toString(atracciones)
-				+ ", costoTotal = " + costoTotal + "]";
+		/*String texto = "Pack promoción";
+		texto += "\nAtracciones: " + this.nombreAtracciones();
+		texto += "\nCostoTotal = " + getCostoTotal();*/
+		String texto = this.nombreAtracciones().toString();
+		
+		return texto;
 	}
-	*/
 }

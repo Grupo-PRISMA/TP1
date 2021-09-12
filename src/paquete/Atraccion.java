@@ -35,6 +35,11 @@ public class Atraccion implements Comparable<Atraccion> {
 		return this.cupoPersonas;
 	}
 
+	public boolean hayCupo() {
+		return this.cupoPersonas > 0;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "Nombre = " + nombre + ", Tipo = " + tipo + ", Costo = " + costo + ", Duracion en Horas = " + duracionHs
@@ -60,5 +65,9 @@ public class Atraccion implements Comparable<Atraccion> {
 		}
 
 		return resultado;
+	}
+
+	public void bajarCupo() {
+		this.cupoPersonas--;
 	}
 }

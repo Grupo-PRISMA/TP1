@@ -105,7 +105,7 @@ public class ManejadorArchivos {
 
 		for (String[] datosPromociones : datos) {
 			Promocion promocion;
-			String[] lista = this.getAtraccionesEnPromocion(datos); 
+			String[] lista = this.getAtraccionesEnPromocion(datosPromociones);
 			ArrayList<Atraccion> atracciones = this.buscarAtracciones(lista);
 
 			if (datosPromociones[0].equals(Promocion.TIPO_ABSOLUTA)) {
@@ -134,14 +134,23 @@ public class ManejadorArchivos {
 		return promociones;
 	}
 
-	private String[] getAtraccionesEnPromocion(ArrayList<String[]> datos) {
-		String[] nombres = new String[0];
-
-		for (String[] dato : datos) {
-			nombres = new String[dato.length - 3];
-			for (int i = 3; i < dato.length; i++) {
-				nombres[i - 3] = dato[i];
-			}
+//	private String[] getAtraccionesEnPromocion(ArrayList<String[]> datos) {
+//		String[] nombres = new String[0];
+//
+//		for (String[] dato : datos) {
+//			nombres = new String[dato.length - 3];
+//			for (int i = 3; i < dato.length; i++) {
+//				nombres[i - 3] = dato[i];
+//			}
+//		}
+//
+//		return nombres;
+//	}
+	private String[] getAtraccionesEnPromocion(String[] dato) {
+		String[] nombres = new String[dato.length - 3];
+		
+		for (int i = 3; i < dato.length; i++) {
+			nombres[i - 3] = dato[i];
 		}
 
 		return nombres;

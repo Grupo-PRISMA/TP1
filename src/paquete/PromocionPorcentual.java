@@ -9,26 +9,24 @@ public class PromocionPorcentual extends Promocion {
 		super(tipo, atracciones);
 		this.descuento = descuento;
 	}
+	
+	public double getCostoTotal(){
+		double costoTotal = 0;
 
-	public double getDescuento() {
-		return super.getCostoTotal() * (this.descuento / 100);
+		for (Atraccion atraccion : this.atracciones) {
+			costoTotal += atraccion.getCosto();
+		}
+
+		return costoTotal * (1 - descuento / 100);
 	}
 
-	@Override
+	public double getDescuento() {
+		return 0;
+	}
+
+	/*@Override
 	public String toString() {
 		return "Tipo de Atraccion = " + tipo + "\tDescuento = " + descuento + "\nAtracciones = "
 				+ atracciones + "\n";
-	}
-	
-	@Override	
-	public boolean tieneCupo() {
-		int contador = 0;
-		for(int i = 0; i < super.atracciones.size(); i++) {
-			if (super.atracciones.get(i).getCupoPersonas() > 0) {
-				contador++;
-			}
-		}
-		
-		return contador == super.atracciones.size();
-	}
+	}*/
 }

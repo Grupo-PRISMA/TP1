@@ -15,83 +15,190 @@ public class PlataformaWeb {
 		this.atracciones = manejadorArchivos.getAtracciones();
 		this.visitantes = manejadorArchivos.getVisitantes();
 		this.promociones = manejadorArchivos.getPromociones();
+		
+//		for (Promocion a : this.promociones) {
+//			System.out.println(a + "\n");
+//		}
+//		System.out.println(".........................");
 	}
 
-	public void crearSugerencia(ArrayList<Visitante> visitantes, ArrayList<Atraccion> atracciones, ArrayList<Promocion> promociones) {
-		ArrayList<Sugerencia> todasLasSugerencias = new ArrayList<Sugerencia>();
-		for (Visitante visitante : visitantes) {
-			TipoDeAtraccion tipoDeAtraccionPreferida = visitante.getPreferencia();
-			
-			// Falta considerar esta parte del enunciado: 
-			//Tampoco deber· ofertarse una atracciÛn que ya haya sido incluida en una 
-			//promociÛn anteriormente comprada por el mismo usuario.
-			while (visitante.getPresupuesto() > 0 && visitante.getTiempoDisponibleHs() > 0) {
-				for (int i = 0; i < promociones.size(); i++) {
-					if (tipoDeAtraccionPreferida == promociones.get(i).getTipo() && promociones.get(i).tieneCupo()) {
-						if (visitante.getPresupuesto() >= promociones.get(i).getCostoTotal()
-								&& visitante.getTiempoDisponibleHs() >= promociones.get(i).getDuracionTotal()) {
-							SugerenciaPromocion sugerencia = new SugerenciaPromocion(promociones.get(i));
-							boolean respuesta = visitante.aceptaSugerenciaPromocion(sugerencia);
-							if (respuesta) {
-								todasLasSugerencias.add(sugerencia);
-								visitante.setPresupuesto(promociones.get(i).getCostoTotal());
-								visitante.setTiempoDisponibleHs(promociones.get(i).getDuracionTotal());
-							}
-						}
-					}
-				}
+	/*private boolean validaRequisitos(Visitante visitante, Promocion promo) {
+		return promo.getTipo() == visitante.getPreferencia() && promo.tieneCupo()
+				&& visitante.getPresupuesto() >= promo.getCostoTotal()
+				&& visitante.getTiempoDisponibleHs() >= promo.getDuracionTotal();
+	}*/
+	
+	private boolean validaRequisitos(Visitante visitante, /*TipoDeAtraccion tipo,*/ boolean cupo, double costo, double duracion) {
+		return /*tipo == visitante.getPreferencia()
+				&&*/ cupo
+				&& visitante.getPresupuesto() >= costo
+				&& visitante.getTiempoDisponibleHs() >= duracion;
+	}
+	
+	private boolean validaRequisitosPromocionPreferencia(Visitante visitante, Promocion promocion) {
+		return visitante.getPreferencia() == promocion.getTipo() &&
+				this.validaRequisitos(visitante, promocion.hayCupo(), promocion.getCostoTotal(), promocion.getDuracionTotal());
+	}
+	
+	private boolean validaRequisitosAtraccionPreferencia(Visitante visitante, Atraccion atraccion) {
+		return atraccion.getTipo() == visitante.getPreferencia() &&
+				this.validaRequisitos(visitante, atraccion.hayCupo(), atraccion.getCosto(), atraccion.getDuracion());
+	}
+	
+	private boolean validaRequisitosPromocion(Visitante visitante, Promocion promocion) {
+		return promocion.getTipo() != visitante.getPreferencia() &&
+				this.validaRequisitos(visitante, promocion.hayCupo(), promocion.getCostoTotal(), promocion.getDuracionTotal());
+	}
+	
+	private boolean validaRequisitosAtraccion(Visitante visitante, Atraccion atraccion) {
+		return atraccion.getTipo() != visitante.getPreferencia() &&
+				this.validaRequisitos(visitante, atraccion.hayCupo(), atraccion.getCosto(), atraccion.getDuracion());
+	}
 
-				for (int i = 0; i < atracciones.size(); i++) {
-					if (tipoDeAtraccionPreferida == atracciones.get(i).getTipo()
-							&& atracciones.get(i).getCupoPersonas() > 0) {
-						if (visitante.getPresupuesto() >= atracciones.get(i).getCosto()
-								&& visitante.getTiempoDisponibleHs() >= atracciones.get(i).getDuracion()) {
-							SugerenciaAtraccion sugerencia = new SugerenciaAtraccion(atracciones.get(i));
-							boolean respuesta = visitante.aceptaSugerenciaAtraccion(sugerencia);
-							if (respuesta) {
-								todasLasSugerencias.add(sugerencia);
-								visitante.setPresupuesto(atracciones.get(i).getCosto());
-								visitante.setTiempoDisponibleHs(atracciones.get(i).getDuracion());
-							}
-						}
-					}
-				}
+	public void sugerir() {
+		for (Visitante visitante : this.visitantes) {
 
-				for (int i = 0; i < promociones.size(); i++) {
-					if (tipoDeAtraccionPreferida != promociones.get(i).getTipo() && promociones.get(i).tieneCupo()) {
-						if (visitante.getPresupuesto() >= promociones.get(i).getCostoTotal()
-								&& visitante.getTiempoDisponibleHs() >= promociones.get(i).getDuracionTotal()) {
-							SugerenciaPromocion sugerencia = new SugerenciaPromocion(promociones.get(i));
-							boolean respuesta = visitante.aceptaSugerenciaPromocion(sugerencia);
-							if (respuesta) {
-								todasLasSugerencias.add(sugerencia);
-								visitante.setPresupuesto(promociones.get(i).getCostoTotal());
-								visitante.setTiempoDisponibleHs(promociones.get(i).getDuracionTotal());
-							}
-						}
-					}
-				}
+			System.out.println("-".repeat(50));
+			System.out.println("Visitante: " + visitante.getNombre());
 
-				for (int i = 0; i < atracciones.size(); i++) {
-					if (tipoDeAtraccionPreferida != atracciones.get(i).getTipo()
-							&& atracciones.get(i).getCupoPersonas() > 0) {
-						if (visitante.getPresupuesto() >= atracciones.get(i).getCosto()
-								&& visitante.getTiempoDisponibleHs() >= atracciones.get(i).getDuracion()) {
-							SugerenciaAtraccion sugerencia = new SugerenciaAtraccion(atracciones.get(i));
-							boolean respuesta = visitante.aceptaSugerenciaAtraccion(sugerencia);
-							if (respuesta) {
-								todasLasSugerencias.add(sugerencia);
-								visitante.setPresupuesto(atracciones.get(i).getCosto());
-								visitante.setTiempoDisponibleHs(atracciones.get(i).getDuracion());
-							}
-						}
-					}
+	
+			ArrayList<Sugerencia> itinerario = this.crearSugerencias(visitante);
+			this.mostrarItinerario(visitante, itinerario);
+			//this.guardarEnArchivoDeSalida(itinerario);
+		}
+	}
+	
+	private ArrayList<Sugerencia> crearSugerencias(Visitante visitante) {
+		ArrayList<Sugerencia> sugerenciasAceptadas = new ArrayList<Sugerencia>();
+		
+		sugerenciasAceptadas = this.crearSugerenciasConPreferencia(visitante, sugerenciasAceptadas);
+		sugerenciasAceptadas = this.crearSugerenciasSinPreferencia(visitante, sugerenciasAceptadas);
+		
+		return sugerenciasAceptadas;
+	}
+	
+	private ArrayList<Sugerencia> crearSugerenciasConPreferencia(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
+		//ArrayList<Sugerencia> sugerencias;
+		sugerencias = this.crearSugerenciasPromocionesConPreferencias(visitante, sugerencias);
+		sugerencias = this.crearSugerenciasAtraccionesConPreferencias(visitante, sugerencias);
+		
+		return sugerencias;
+	}
+	
+	private ArrayList<Sugerencia> crearSugerenciasPromocionesConPreferencias(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
+		for (Promocion promocion : this.promociones) {
+			Sugerencia sugerencia = new Sugerencia(promocion);
+			System.out.println("verificando promocion" + promocion);
+			if (this.validaRequisitosPromocionPreferencia(visitante, promocion)) {
+				
+				System.out.println("cumple");
+				if (visitante.decidirSugerencia(sugerencia)) {
+					System.out.println("aceptada");
+					sugerencias.add(sugerencia);
+					promocion.bajarCupo();
+					//System.out.println("");
+				} else {
+					System.out.println("rechazada");
 				}
-
+			} else {
+				System.out.println("no cumple");				
 			}
-			visitante.itinerario = todasLasSugerencias;
+			
+			System.out.println("=====");
+		}
+		
+		return sugerencias;
+	}
+	
+	private ArrayList<Sugerencia> crearSugerenciasAtraccionesConPreferencias(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
+		System.out.println("ATRACCIONES CON PREFRENCIA");
+		for (Atraccion atraccion : this.atracciones) {
+			Sugerencia sugerencia = new Sugerencia(atraccion);
+			
+			if (!sugerencia.estaEn(sugerencias) && this.validaRequisitosAtraccionPreferencia(visitante, atraccion)) {
+				System.out.println("valida");
+				System.out.println("Atracci√≥n " + atraccion.getNombre() + "\n");
+				
+				if (visitante.decidirSugerencia(sugerencia)) {
+					sugerencias.add(sugerencia);
+					atraccion.bajarCupo();
+					System.out.println("acepta");
+				} else {
+					System.out.println("rechaza");
+				}
+			} else {
+				System.out.println("repetido o no valido");
+			}
+		}
+		
+		return sugerencias;
+	}
+	
+	private ArrayList<Sugerencia> crearSugerenciasSinPreferencia(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
+		sugerencias = this.crearSugerenciasPromocionesSinPreferencias(visitante, sugerencias);
+		sugerencias = this.crearSugerenciasAtraccionesSinPreferencias(visitante, sugerencias);
+		
+		return sugerencias;
+	}
+	
+	private ArrayList<Sugerencia> crearSugerenciasPromocionesSinPreferencias(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
+		System.out.println("PROMOCIONES SIN PREFERENCIAS");
+		
+		for (Promocion promocion :  this.promociones) {
+			Sugerencia sugerencia = new Sugerencia(promocion);
+			System.out.println("la promo es " + promocion);
+			if (!sugerencia.estaEn(sugerencias) && this.validaRequisitosPromocion(visitante, promocion)) {
+				System.out.println("valido");
+				
+				if (visitante.decidirSugerencia(sugerencia)) {
+					sugerencias.add(sugerencia);
+					promocion.bajarCupo();
+					System.out.println("acepta");
+				} else {
+					System.out.println("rechaza");
+				}
+			} else {
+				System.out.println("no valido");
+			}
+		}
+		
+		return sugerencias;
+	}
+	
+	private ArrayList<Sugerencia> crearSugerenciasAtraccionesSinPreferencias(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
+		System.out.println("ATRACCIONES SIN PREFERENCIAS");
+		
+		for (Atraccion atraccion : this.atracciones) {
+			Sugerencia sugerencia = new Sugerencia(atraccion);
+			
+			if (!sugerencia.estaEn(sugerencias) && this.validaRequisitosAtraccion(visitante, atraccion)) {
+				System.out.println("valida");
+				System.out.println("Atracci√≥n " + atraccion.getNombre() + "\n");
+				if (visitante.decidirSugerencia(sugerencia)) {
+					sugerencias.add(sugerencia);
+					atraccion.bajarCupo();System.out.println("acepta");
+				} else {
+					System.out.println("rechaza");
+				}
+			} else {
+				System.out.println("no valido");
+			}
+		}
+		
+		return sugerencias;
+	}
+
+	public void mostrarItinerario(Visitante visitante, ArrayList<Sugerencia> itinerario) {
+		double costoTotal = 0;
+		double duracionTotal = 0;
+	
+		for (Sugerencia sugerencia : itinerario) {
+			System.out.println(sugerencia);
+			costoTotal += sugerencia.getCosto();
+			duracionTotal += sugerencia.getDuracionHs();
 		}
 
+		System.out.println("Costo total= " + costoTotal + "\nDuraci√≥n total= " + duracionTotal);
 	}
 
 	@Override

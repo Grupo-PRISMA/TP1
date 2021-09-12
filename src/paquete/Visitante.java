@@ -9,14 +9,12 @@ public class Visitante {
 	private double tiempoDisponibleHs;
 	private TipoDeAtraccion preferencia;
 
-	ArrayList<Sugerencia> itinerario;
-
 	public Visitante(String nombre, TipoDeAtraccion preferencia, double presupuesto, double tiempoDisponibleHs) {
 		this.nombre = nombre;
 		this.presupuesto = presupuesto;
 		this.tiempoDisponibleHs = tiempoDisponibleHs;
 		this.preferencia = preferencia;
-		this.itinerario = new ArrayList<Sugerencia>();
+		//this.itinerario = new ArrayList<Sugerencia>();
 	}
 
 	public String getNombre() {
@@ -34,43 +32,30 @@ public class Visitante {
 	public double getTiempoDisponibleHs() {
 		return this.tiempoDisponibleHs;
 	}
-
-	public boolean tieneHs() {
-		return getTiempoDisponibleHs() > 0;
-	}
-
-	public boolean tienePresupuesto() {
-		return getPresupuesto() > 0;
-	}
-
-	public void setPresupuesto(double presupuesto) {
-		this.presupuesto -= presupuesto;
-	}
-
-	public void setTiempoDisponibleHs(double tiempoDisponibleHs) {
-		this.tiempoDisponibleHs -= tiempoDisponibleHs;
-	}
-
-	public boolean aceptaSugerenciaAtraccion(SugerenciaAtraccion sugerencia) {
-		char respuesta;
-		Scanner entradaEscaner = new Scanner(System.in);
-		System.out.println("Acepta sugerencia? (S/N)");
-		respuesta = entradaEscaner.nextLine().charAt(0);
-		entradaEscaner.close();
-		// promo.setAceptada(Character.toUpperCase(respuesta) == 'S');
-		
-		return Character.toUpperCase(respuesta) == 'S';
-	}
 	
-	public boolean aceptaSugerenciaPromocion(SugerenciaPromocion sugerencia) {
+	public boolean decidirSugerencia(Sugerencia sugerencia) {	
 		char respuesta;
-		Scanner entradaEscaner = new Scanner(System.in);
-		System.out.println("Acepta sugerencia? (S/N)");
-		respuesta = entradaEscaner.nextLine().charAt(0);
-		entradaEscaner.close();
-		// promo.setAceptada(Character.toUpperCase(respuesta) == 'S');
-
-		return Character.toUpperCase(respuesta) == 'S';
+		Scanner entrada = new Scanner(System.in);	
+		
+		do {
+			System.out.println("Acepta sugerencia? Ingrese S o N");
+			String a = entrada.nextLine();
+			System.out.println(a);
+			respuesta = a.charAt(0);
+			respuesta = Character.toUpperCase(respuesta);
+		} while (respuesta != 'S' && respuesta != 'N' && entrada.hasNextLine());
+		//System.out.println("fin do while");
+		//entrada.close();
+		//System.out.println("cierra scanner");
+		
+		//promo.setAceptada(Character.toUpperCase(respuesta) == 'S');
+		if(respuesta == 'S') {
+			this.presupuesto -= sugerencia.getCosto();
+			this.tiempoDisponibleHs -= sugerencia.getDuracionHs();
+		}
+		
+		return respuesta == 'S';
+		//return false;
 	}
 	
 	@Override
