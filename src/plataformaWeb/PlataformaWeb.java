@@ -12,6 +12,7 @@ public class PlataformaWeb {
 	private ArrayList<Atraccion> atracciones;
 	private ArrayList<Visitante> visitantes;
 	private ArrayList<Promocion> promociones;
+	private ArrayList<Sugerencia> itinerario;
 
 	public PlataformaWeb() {
 		ManejadorArchivos manejadorArchivos = new ManejadorArchivos();
@@ -52,7 +53,7 @@ public class PlataformaWeb {
 			System.out.println("Visitante: " + visitante.getNombre());
 
 	
-			ArrayList<Sugerencia> itinerario = this.crearSugerencias(visitante);
+			this.itinerario = this.crearSugerencias(visitante);
 			this.mostrarItinerario(visitante, itinerario);
 			//this.guardarEnArchivoDeSalida(itinerario);
 		}
@@ -177,7 +178,7 @@ public class PlataformaWeb {
 		return sugerencias;
 	}
 
-	private void mostrarItinerario(Visitante visitante, ArrayList<Sugerencia> itinerario) {
+	public void mostrarItinerario(Visitante visitante, ArrayList<Sugerencia> itinerario) {
 		double costoTotal = 0;
 		double duracionTotal = 0;
 	
@@ -188,6 +189,10 @@ public class PlataformaWeb {
 		}
 
 		System.out.println("Costo total= " + costoTotal + "\nDuración total= " + duracionTotal);
+	}
+
+	public ArrayList<Sugerencia> getItinerario() {
+		return itinerario;
 	}
 
 	@Override

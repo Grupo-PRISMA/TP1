@@ -65,8 +65,17 @@ public class ManejadorArchivos {
 				datos.add(linea.split(";"));
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("ERROR!!!\n" + e.getMessage());
 		}
+		
+		/*finally {
+			try {
+				if (fileReader) {
+					
+				}
+			}
+		}*/
 
 		return datos;
 	}
