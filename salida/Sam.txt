@@ -1,1 +1,9 @@
-sugerencia.Sugerencia@6108b2d7
+
+--------------------------------------------------
+Atracciones Realizadas
+--------------------------------------------------
+Lothlorien
+La Comarca
+
+Costo total= 35.0
+Duración total= 7.5

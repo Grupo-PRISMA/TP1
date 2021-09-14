@@ -1,6 +1,5 @@
 package plataformaWeb;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import atraccion.Atraccion;
@@ -14,7 +13,6 @@ public class PlataformaWeb {
 	private ArrayList<Atraccion> atracciones;
 	private ArrayList<Visitante> visitantes;
 	private ArrayList<Promocion> promociones;
-	//private ArrayList<Sugerencia> itinerario;
 
 	public PlataformaWeb() {
 		LecturaDeArchivos manejadorArchivos = new LecturaDeArchivos();
@@ -62,7 +60,7 @@ public class PlataformaWeb {
 	}
 	
 	public void guardarEnArchivoDeSalida(Visitante visitante, ArrayList<Sugerencia> itinerario) {
-		EscrituraSalidaDeArchivos.salidaItinerario(itinerario, visitante.getNombre() + ".txt");
+		EscrituraSalidaDeArchivos.salidaItinerario(visitante.getNombre() + ".txt", this.datosItinerario(visitante, itinerario));
 	}
 	
 	private ArrayList<Sugerencia> crearSugerencias(Visitante visitante) {
@@ -92,13 +90,8 @@ public class PlataformaWeb {
 					System.out.println("aceptada");
 					sugerencias.add(sugerencia);
 					promocion.bajarCupo();
-					//System.out.println("");
-				} else {
-					System.out.println("rechazada");
-				}
-			} else {
-				System.out.println("no cumple");				
-			}
+				} 
+			} 
 			
 			System.out.println("=====");
 		}
@@ -172,34 +165,41 @@ public class PlataformaWeb {
 				System.out.println("Atracción " + atraccion.getNombre() + "\n");
 				if (visitante.decidirSugerencia(sugerencia)) {
 					sugerencias.add(sugerencia);
-					atraccion.bajarCupo();System.out.println("acepta");
-				} else {
-					System.out.println("rechaza");
+					atraccion.bajarCupo();
 				}
-			} else {
-				System.out.println("no valido");
-			}
+			} 
 		}
 		
 		return sugerencias;
 	}
-
-	public void mostrarItinerario(Visitante visitante, ArrayList<Sugerencia> itinerario) {
+	
+	public String datosItinerario(Visitante visitante, ArrayList<Sugerencia> itinerario) {
 		double costoTotal = 0;
 		double duracionTotal = 0;
 	
 		String texto = "\n" + "-".repeat(50);
 		texto += "\nAtracciones Realizadas";
 		texto += "\n" + "-".repeat(50);
-		System.out.println(texto);
-		
+		//System.out.println(texto);
+		ArrayList<String> nombres = null;
+		String cadenaNombres = "";
 		for (Sugerencia sugerencia : itinerario) {
-			System.out.println(sugerencia.getNombresAtracciones());
+			nombres = sugerencia.getNombresAtracciones();
+			for(int i = 0; i < nombres.size(); i++) {
+				String cadena = nombres.get(i);
+				cadenaNombres += cadena + "\n";
+				//System.out.println(cadenaNombres);
+			}
+			//System.out.println(nombres);
 			costoTotal += sugerencia.getCosto();
 			duracionTotal += sugerencia.getDuracion();
 		}
 		
-		System.out.println("Costo total= " + costoTotal + "\nDuración total= " + duracionTotal);
+		//System.out.println("Costo total= " + costoTotal + "\nDuración total= " + duracionTotal);
+		return texto + "\n" + cadenaNombres + "\nCosto total= " + costoTotal + "\nDuración total= " + duracionTotal;
+	}
+	public void mostrarItinerario(Visitante visitante, ArrayList<Sugerencia> itinerario) {
+		System.out.println(this.datosItinerario(visitante, itinerario));
 	}
 
 

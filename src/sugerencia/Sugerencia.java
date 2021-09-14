@@ -46,8 +46,8 @@ public class Sugerencia {
 		return this.duracion;
 	}
 
-	/*@Override
-	public String toString() {
+	//@Override
+	/*public String toString() {
 		String texto = "\n" + this.getNombresAtracciones();
 		texto += "\nCosto Total = " + costo;
 		texto += "\nHoras utilizadas = " + duracion;

@@ -1,2 +1,9 @@
-sugerencia.Sugerencia@2f7a2457
-sugerencia.Sugerencia@566776ad
+
+--------------------------------------------------
+Atracciones Realizadas
+--------------------------------------------------
+Erebor
+Abismo de Helm
+
+Costo total= 17.0
+Duración total= 5.0

@@ -1,1 +1,8 @@
-sugerencia.Sugerencia@7f690630
+
+--------------------------------------------------
+Atracciones Realizadas
+--------------------------------------------------
+Moria
+
+Costo total= 10.0
+Duración total= 2.0
