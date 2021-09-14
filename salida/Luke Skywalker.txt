@@ -8,11 +8,9 @@ Atracciones de tu itinerario
 --------------------------------------------------
 Estrella de la Muerte
 Hoth
-Geonosis
-Kashyyk
 
-Costo total= 68.0
-Duracion total= 8.0
+Costo total= 28.0
+Duracion total= 5.0
          _____
        .'/L|__`.
       / =[_]O|` \

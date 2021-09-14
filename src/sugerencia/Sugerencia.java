@@ -16,13 +16,9 @@ public class Sugerencia {
 		this.nombresAtracciones = this.extraerNombre(promo.getAtracciones());
 		this.costo = promo.getCostoTotal();
 		this.duracion = promo.getDuracionTotal();
-	}
-	
-	public Sugerencia(PromocionAxB promo) {
-		this.nombresAtracciones = this.extraerNombre(promo.getAtracciones());
-		this.nombresAtracciones.add(promo.getNombreAtraccionGratis());
-		this.costo = promo.getCostoTotal();
-		this.duracion = promo.getDuracionTotal();
+		if (promo.getClass().equals(PromocionAxB.class)) {
+			this.nombresAtracciones.add(((PromocionAxB) promo).getNombreAtraccionGratis());
+		}
 	}
 
 	public Sugerencia(Atraccion atraccion) {
@@ -54,8 +50,8 @@ public class Sugerencia {
 		return this.duracion;
 	}
 
-	//@Override
-	/*public String toString() {
+	/*@Override
+	public String toString() {
 		String texto = "\n" + this.getNombresAtracciones();
 		texto += "\nCosto Total = " + costo;
 		texto += "\nHoras utilizadas = " + duracion;

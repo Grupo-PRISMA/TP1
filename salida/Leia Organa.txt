@@ -6,10 +6,10 @@ Esperamos que disfrutes de nuestras atracciones
 --------------------------------------------------
 Atracciones de tu itinerario
 --------------------------------------------------
-Naboo
-Kashyyk
+Estrella de la Muerte
+Hoth
 
-Costo total= 17.0
+Costo total= 28.0
 Duracion total= 5.0
          _____
        .'/L|__`.
