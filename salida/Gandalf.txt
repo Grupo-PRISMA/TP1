@@ -1,6 +1,10 @@
 
 --------------------------------------------------
-Atracciones Realizadas
+Hola Gandalf
+Bienvenido a Tierra Media
+Esperamos que disfrutes de nuestras atracciones
+--------------------------------------------------
+Atracciones de tu itinerario
 --------------------------------------------------
 Erebor
 Abismo de Helm

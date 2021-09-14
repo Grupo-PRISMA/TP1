@@ -176,13 +176,16 @@ public class PlataformaWeb {
 	public String datosItinerario(Visitante visitante, ArrayList<Sugerencia> itinerario) {
 		double costoTotal = 0;
 		double duracionTotal = 0;
-	
-		String texto = "\n" + "-".repeat(50);
-		texto += "\nAtracciones Realizadas";
-		texto += "\n" + "-".repeat(50);
-		//System.out.println(texto);
 		ArrayList<String> nombres = null;
 		String cadenaNombres = "";
+	
+		String texto = "\n" + "-".repeat(50);
+		texto += "\nHola " + visitante.getNombre() + "\nBienvenido a Tierra Media";
+		texto += "\nEsperamos que disfrutes de nuestras atracciones";
+		texto += "\n" + "-".repeat(50);
+		texto += "\nAtracciones de tu itinerario";
+		texto += "\n" + "-".repeat(50);
+	
 		for (Sugerencia sugerencia : itinerario) {
 			nombres = sugerencia.getNombresAtracciones();
 			for(int i = 0; i < nombres.size(); i++) {
