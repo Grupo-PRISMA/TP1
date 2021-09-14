@@ -1,9 +1,11 @@
 package plataformaWeb;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import atraccion.Atraccion;
-import manejadorDeArchivos.ManejadorArchivos;
+import manejadorDeArchivos.EscrituraSalidaDeArchivos;
+import manejadorDeArchivos.LecturaDeArchivos;
 import promociones.Promocion;
 import sugerencia.Sugerencia;
 import visitante.Visitante;
@@ -12,10 +14,10 @@ public class PlataformaWeb {
 	private ArrayList<Atraccion> atracciones;
 	private ArrayList<Visitante> visitantes;
 	private ArrayList<Promocion> promociones;
-	private ArrayList<Sugerencia> itinerario;
+	//private ArrayList<Sugerencia> itinerario;
 
 	public PlataformaWeb() {
-		ManejadorArchivos manejadorArchivos = new ManejadorArchivos();
+		LecturaDeArchivos manejadorArchivos = new LecturaDeArchivos();
 
 		this.atracciones = manejadorArchivos.getAtracciones();
 		this.visitantes = manejadorArchivos.getVisitantes();
@@ -53,10 +55,14 @@ public class PlataformaWeb {
 			System.out.println("Visitante: " + visitante.getNombre());
 
 	
-			this.itinerario = this.crearSugerencias(visitante);
+			ArrayList<Sugerencia> itinerario = this.crearSugerencias(visitante);
 			this.mostrarItinerario(visitante, itinerario);
-			//this.guardarEnArchivoDeSalida(itinerario);
+			this.guardarEnArchivoDeSalida(visitante, itinerario);
 		}
+	}
+	
+	public void guardarEnArchivoDeSalida(Visitante visitante, ArrayList<Sugerencia> itinerario) {
+		EscrituraSalidaDeArchivos.salidaItinerario(itinerario, visitante.getNombre() + ".txt");
 	}
 	
 	private ArrayList<Sugerencia> crearSugerencias(Visitante visitante) {
@@ -182,18 +188,20 @@ public class PlataformaWeb {
 		double costoTotal = 0;
 		double duracionTotal = 0;
 	
+		String texto = "\n" + "-".repeat(50);
+		texto += "\nAtracciones Realizadas";
+		texto += "\n" + "-".repeat(50);
+		System.out.println(texto);
+		
 		for (Sugerencia sugerencia : itinerario) {
-			System.out.println(sugerencia);
+			System.out.println(sugerencia.getNombresAtracciones());
 			costoTotal += sugerencia.getCosto();
 			duracionTotal += sugerencia.getDuracion();
 		}
-
+		
 		System.out.println("Costo total= " + costoTotal + "\nDuración total= " + duracionTotal);
 	}
 
-	public ArrayList<Sugerencia> getItinerario() {
-		return itinerario;
-	}
 
 	@Override
 	public String toString() {

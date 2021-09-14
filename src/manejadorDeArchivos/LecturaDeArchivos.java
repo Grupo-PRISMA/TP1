@@ -15,13 +15,13 @@ import promociones.PromocionAxB;
 import promociones.PromocionPorcentual;
 import visitante.Visitante;
 
-public class ManejadorArchivos {
+public class LecturaDeArchivos {
 
 	private ArrayList<Atraccion> atracciones;
 	private ArrayList<Visitante> visitantes;
 	private ArrayList<Promocion> promociones;
 
-	public ManejadorArchivos() {
+	public LecturaDeArchivos() {
 		this.cargarAtracciones();
 		this.cargarPromociones();
 		this.cargarVisitantes();
@@ -57,8 +57,10 @@ public class ManejadorArchivos {
 	private ArrayList<String[]> leerArchivo(String ruta) {
 		ArrayList<String[]> datos = new ArrayList<>();
 
+		FileReader archivo = null;
 		try {
-			BufferedReader lector = new BufferedReader(new FileReader(new File(ruta)));
+			archivo = new FileReader(new File(ruta));
+			BufferedReader lector = new BufferedReader(archivo);
 			String linea;
 
 			while ((linea = lector.readLine()) != null) {
@@ -69,13 +71,13 @@ public class ManejadorArchivos {
 			System.out.println("ERROR!!!\n" + e.getMessage());
 		}
 		
-		/*finally {
+		finally {
 			try {
-				if (fileReader) {
-					
-				}
+				archivo.close();
+			} catch (Exception e) {
+				System.out.println("Mensaje error cierre de archivo: " + e.getMessage());
 			}
-		}*/
+		}
 
 		return datos;
 	}

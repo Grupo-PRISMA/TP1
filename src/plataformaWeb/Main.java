@@ -2,7 +2,7 @@ package plataformaWeb;
 
 import java.io.IOException;
 
-import manejadorDeArchivos.EscrituraSalida;
+import manejadorDeArchivos.EscrituraSalidaDeArchivos;
 
 public class Main {
 
@@ -11,8 +11,6 @@ public class Main {
 		PlataformaWeb plataforma = new PlataformaWeb();
 		plataforma.sugerir();
 		
-		EscrituraSalida datos = new EscrituraSalida(plataforma);
-		datos.salida();
 		
 		
 	}
