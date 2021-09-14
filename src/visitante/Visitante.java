@@ -41,9 +41,13 @@ public class Visitante {
 		
 		do {
 			System.out.println("Acepta sugerencia? Ingrese S o N");
-			String a = entrada.nextLine();
-			respuesta = a.charAt(0);
-			respuesta = Character.toUpperCase(respuesta);
+			String ingreso = entrada.nextLine();
+			if (ingreso.length() > 0) {
+				respuesta = Character.toUpperCase(ingreso.charAt(0));
+			}else {
+				respuesta = ' ';
+			}
+			
 		} while (respuesta != 'S' && respuesta != 'N' && entrada.hasNextLine());
 
 		if(respuesta == 'S') {

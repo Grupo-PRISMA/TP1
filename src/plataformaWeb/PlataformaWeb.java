@@ -48,13 +48,17 @@ public class PlataformaWeb {
 
 	public void sugerir() {
 		for (Visitante visitante : this.visitantes) {
-
 			System.out.println("-".repeat(50));
+			System.out.println("\n    Bienvenido/a a la Guerra de las Galaxias");
+			System.out.println("-".repeat(50));
+			System.out.println("\n");
 			System.out.println("Nombre de visitante: " + visitante.getNombre().toUpperCase());
 
 			ArrayList<Sugerencia> itinerario = this.crearSugerencias(visitante);
 			this.mostrarItinerario(visitante, itinerario);
 			this.guardarEnArchivoDeSalida(visitante, itinerario);
+			System.out.println("-".repeat(50));
+			System.out.println("");
 		}
 	}
 
@@ -80,18 +84,19 @@ public class PlataformaWeb {
 		return sugerencias;
 	}
 
-	private ArrayList<Sugerencia> crearSugerenciasPromocionesConPreferencias(Visitante visitante,
-			ArrayList<Sugerencia> sugerencias) {
+	private ArrayList<Sugerencia> crearSugerenciasPromocionesConPreferencias(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
 		for (Promocion promocion : this.promociones) {
 			Sugerencia sugerencia = new Sugerencia(promocion);
 			if (!sugerencia.estaEn(sugerencias) && this.validaRequisitosPromocionPreferencia(visitante, promocion)) {
 				System.out.println("Promocion:" + promocion);
+				System.out.println("");
 				if (visitante.decidirSugerencia(sugerencia)) {
-					System.out.println("¡Aceptada!");
+					System.out.println("Â¡Aceptada!");
 					sugerencias.add(sugerencia);
 					promocion.bajarCupo();
 				}
 				System.out.println("======================");
+				System.out.println("");
 			}
 
 		}
@@ -99,8 +104,7 @@ public class PlataformaWeb {
 		return sugerencias;
 	}
 
-	private ArrayList<Sugerencia> crearSugerenciasAtraccionesConPreferencias(Visitante visitante,
-			ArrayList<Sugerencia> sugerencias) {
+	private ArrayList<Sugerencia> crearSugerenciasAtraccionesConPreferencias(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
 		for (Atraccion atraccion : this.atracciones) {
 			Sugerencia sugerencia = new Sugerencia(atraccion);
 
@@ -108,47 +112,48 @@ public class PlataformaWeb {
 
 				System.out.println("Atraccion: " + atraccion.getNombre() + "\n");
 				System.out.println("Costo total: " + atraccion.getCosto() + ", Duracion: " + atraccion.getDuracion());
+				System.out.println("");
 				if (visitante.decidirSugerencia(sugerencia)) {
-					System.out.println("¡Aceptada!");
+					System.out.println("Â¡Aceptada!");
 					sugerencias.add(sugerencia);
 					atraccion.bajarCupo();
 				}
 				System.out.println("======================");
+				System.out.println("");
 			}
 		}
 		return sugerencias;
 	}
 
-	private ArrayList<Sugerencia> crearSugerenciasSinPreferencia(Visitante visitante,
-			ArrayList<Sugerencia> sugerencias) {
+	private ArrayList<Sugerencia> crearSugerenciasSinPreferencia(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
 		sugerencias = this.crearSugerenciasPromocionesSinPreferencias(visitante, sugerencias);
 		sugerencias = this.crearSugerenciasAtraccionesSinPreferencias(visitante, sugerencias);
 
 		return sugerencias;
 	}
 
-	private ArrayList<Sugerencia> crearSugerenciasPromocionesSinPreferencias(Visitante visitante,
-			ArrayList<Sugerencia> sugerencias) {
+	private ArrayList<Sugerencia> crearSugerenciasPromocionesSinPreferencias(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
 
 		for (Promocion promocion : this.promociones) {
 			Sugerencia sugerencia = new Sugerencia(promocion);
 			
 			if (!sugerencia.estaEn(sugerencias) && this.validaRequisitosPromocion(visitante, promocion)) {
 				System.out.println("Promocion: " + promocion);
+				System.out.println("");
 				if (visitante.decidirSugerencia(sugerencia)) {
-					System.out.println("¡Aceptada!");
+					System.out.println("Â¡Aceptada!");
 					sugerencias.add(sugerencia);
 					promocion.bajarCupo();
 				}
 				System.out.println("======================");
+				System.out.println("");
 			}
 		}
 
 		return sugerencias;
 	}
 
-	private ArrayList<Sugerencia> crearSugerenciasAtraccionesSinPreferencias(Visitante visitante,
-			ArrayList<Sugerencia> sugerencias) {
+	private ArrayList<Sugerencia> crearSugerenciasAtraccionesSinPreferencias(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
 
 		for (Atraccion atraccion : this.atracciones) {
 			Sugerencia sugerencia = new Sugerencia(atraccion);
@@ -156,12 +161,14 @@ public class PlataformaWeb {
 			if (!sugerencia.estaEn(sugerencias) && this.validaRequisitosAtraccion(visitante, atraccion)) {
 				System.out.println("Atraccion: " + atraccion.getNombre() + "\n");
 				System.out.println("Costo total: " + atraccion.getCosto() + ", Duracion: " + atraccion.getDuracion());
+				System.out.println("");
 				if (visitante.decidirSugerencia(sugerencia)) {
-					System.out.println("¡Aceptada!");
+					System.out.println("Â¡Aceptada!");
 					sugerencias.add(sugerencia);
 					atraccion.bajarCupo();
 				}
 				System.out.println("======================");
+				System.out.println("");
 			}
 		}
 
@@ -186,15 +193,11 @@ public class PlataformaWeb {
 			for (int i = 0; i < nombres.size(); i++) {
 				String cadena = nombres.get(i);
 				cadenaNombres += cadena + "\n";
-				// System.out.println(cadenaNombres);
 			}
-			// System.out.println(nombres);
 			costoTotal += sugerencia.getCosto();
 			duracionTotal += sugerencia.getDuracion();
 		}
 
-		// System.out.println("Costo total= " + costoTotal + "\nDuraciÃ³n total= " +
-		// duracionTotal);
 		return texto + "\n" + cadenaNombres + "\nCosto total= " + costoTotal + "\nDuracion total= " + duracionTotal;
 	}
 

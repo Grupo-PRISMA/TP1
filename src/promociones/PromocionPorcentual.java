@@ -30,7 +30,7 @@ public class PromocionPorcentual extends Promocion {
 	@Override
 	public String toString() {
 		return "[" + atracciones.get(0).getNombre() + ", " + atracciones.get(1).getNombre() + "]\nPrecio original: " + super.getCostoSinDescuento() + 
-				" Duracion: " + this.getDuracionTotal() + "\n Precio con descuento: " + this.getCostoTotal();
+				" Duracion: " + this.getDuracionTotal() + "\nPrecio con descuento: " + this.getCostoTotal();
 
 	}
 }

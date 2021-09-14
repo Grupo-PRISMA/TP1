@@ -37,4 +37,8 @@ public class PromocionAxB extends Promocion {
 	public Atraccion getAtraccionGratis() {
 		return this.atraccionGratis;
 	}
+
+	public String getNombreAtraccionGratis() {
+		return this.atraccionGratis.getNombre();
+	}
 }

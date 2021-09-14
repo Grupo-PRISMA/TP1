@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import atraccion.Atraccion;
 import promociones.Promocion;
+import promociones.PromocionAxB;
 
 public class Sugerencia {
 
@@ -13,6 +14,13 @@ public class Sugerencia {
 
 	public Sugerencia(Promocion promo) {
 		this.nombresAtracciones = this.extraerNombre(promo.getAtracciones());
+		this.costo = promo.getCostoTotal();
+		this.duracion = promo.getDuracionTotal();
+	}
+	
+	public Sugerencia(PromocionAxB promo) {
+		this.nombresAtracciones = this.extraerNombre(promo.getAtracciones());
+		this.nombresAtracciones.add(promo.getNombreAtraccionGratis());
 		this.costo = promo.getCostoTotal();
 		this.duracion = promo.getDuracionTotal();
 	}

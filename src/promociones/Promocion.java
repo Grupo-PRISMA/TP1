@@ -91,5 +91,4 @@ public abstract class Promocion
 		
 		return texto;
 	}
-	
 }

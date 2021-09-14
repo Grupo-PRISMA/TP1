@@ -1,0 +1,15 @@
+TU ITINERARIO
+--------------------------------------------------
+Hola Luke Skywalker
+Bienvenido a La Guerra de las Galaxias
+Esperamos que disfrutes de nuestras atracciones
+--------------------------------------------------
+Atracciones de tu itinerario
+--------------------------------------------------
+Estrella de la Muerte
+Hoth
+Geonosis
+Kashyyk
+
+Costo total= 68.0
+Duracion total= 8.0

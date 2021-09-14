@@ -1,0 +1,13 @@
+TU ITINERARIO
+--------------------------------------------------
+Hola Leia Organa
+Bienvenido a La Guerra de las Galaxias
+Esperamos que disfrutes de nuestras atracciones
+--------------------------------------------------
+Atracciones de tu itinerario
+--------------------------------------------------
+Naboo
+Kashyyk
+
+Costo total= 17.0
+Duracion total= 5.0
