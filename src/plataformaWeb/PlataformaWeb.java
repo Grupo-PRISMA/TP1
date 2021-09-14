@@ -48,16 +48,16 @@ public class PlataformaWeb {
 
 	public void sugerir() {
 		for (Visitante visitante : this.visitantes) {
-			System.out.println("-".repeat(50));
+			System.out.println("-".repeat(100));
 			System.out.println("\n    Bienvenido/a a la Guerra de las Galaxias");
-			System.out.println("-".repeat(50));
+			System.out.println("-".repeat(100));
 			System.out.println("\n");
 			System.out.println("Nombre de visitante: " + visitante.getNombre().toUpperCase());
 
 			ArrayList<Sugerencia> itinerario = this.crearSugerencias(visitante);
 			this.mostrarItinerario(visitante, itinerario);
 			this.guardarEnArchivoDeSalida(visitante, itinerario);
-			System.out.println("-".repeat(50));
+			System.out.println("-".repeat(100));
 			System.out.println("");
 		}
 	}
@@ -95,7 +95,7 @@ public class PlataformaWeb {
 					sugerencias.add(sugerencia);
 					promocion.bajarCupo();
 				}
-				System.out.println("======================");
+				System.out.println("-".repeat(100));
 				System.out.println("");
 			}
 
@@ -118,7 +118,7 @@ public class PlataformaWeb {
 					sugerencias.add(sugerencia);
 					atraccion.bajarCupo();
 				}
-				System.out.println("======================");
+				System.out.println("-".repeat(100));
 				System.out.println("");
 			}
 		}
@@ -145,7 +145,7 @@ public class PlataformaWeb {
 					sugerencias.add(sugerencia);
 					promocion.bajarCupo();
 				}
-				System.out.println("======================");
+				System.out.println("-".repeat(100));
 				System.out.println("");
 			}
 		}
@@ -167,7 +167,7 @@ public class PlataformaWeb {
 					sugerencias.add(sugerencia);
 					atraccion.bajarCupo();
 				}
-				System.out.println("======================");
+				System.out.println("-".repeat(100));
 				System.out.println("");
 			}
 		}
@@ -187,6 +187,7 @@ public class PlataformaWeb {
 		texto += "\n" + "-".repeat(50);
 		texto += "\nAtracciones de tu itinerario";
 		texto += "\n" + "-".repeat(50);
+		
 
 		for (Sugerencia sugerencia : itinerario) {
 			nombres = sugerencia.getNombresAtracciones();
@@ -198,7 +199,26 @@ public class PlataformaWeb {
 			duracionTotal += sugerencia.getDuracion();
 		}
 
-		return texto + "\n" + cadenaNombres + "\nCosto total= " + costoTotal + "\nDuracion total= " + duracionTotal;
+		texto += "\n" + cadenaNombres + "\nCosto total= " + costoTotal + "\nDuracion total= " + duracionTotal;
+		
+		texto += "\r\n"
+				+ "         _____\r\n"
+				+ "       .'/L|__`.\r\n"
+				+ "      / =[_]O|` \\\r\n"
+				+ "      |\"+_____\":|\r\n"
+				+ "    __:='|____`-:__\r\n"
+				+ "   ||[] ||====| []||\r\n"
+				+ "   ||[] | |=| | []||\r\n"
+				+ "   |:||_|=|U| |_||:|\r\n"
+				+ "   |:|||]_=_ =[_||:| \r\n"
+				+ "   | |||] [_][]C|| |\r\n"
+				+ "   | ||-'\"\"\"\"\"`-|| |\r\n"
+				+ "   /|\\\\_\\_|_|_/_//|\\\r\n"
+				+ "  |___|   /|\\   |___| \r\n"
+				+ "  `---'  |___|  `---' \r\n"
+				+ "         `---'\r\n";
+		
+		return texto;
 	}
 
 	public void mostrarItinerario(Visitante visitante, ArrayList<Sugerencia> itinerario) {
