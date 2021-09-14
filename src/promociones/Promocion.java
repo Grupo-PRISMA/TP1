@@ -37,6 +37,16 @@ public abstract class Promocion
 		return costoTotal - this.getDescuento();
 	}
 	
+	public double getCostoSinDescuento(){
+		double costoTotal = 0;
+
+		for (Atraccion atraccion : this.atracciones) {
+			costoTotal += atraccion.getCosto();
+		}
+
+		return costoTotal;
+	}
+	
 	public double getDuracionTotal() {
 		double duracionTotal = 0;
 
@@ -77,11 +87,9 @@ public abstract class Promocion
 
 	@Override
 	public String toString() {
-		/*String texto = "Pack promoción";
-		texto += "\nAtracciones: " + this.nombreAtracciones();
-		texto += "\nCostoTotal = " + getCostoTotal();*/
 		String texto = this.nombreAtracciones().toString();
 		
 		return texto;
 	}
+	
 }

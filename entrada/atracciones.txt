@@ -1,8 +1,8 @@
-Moria;AVENTURA;10;2;6
-Minas Tirith;PAISAJE;5;2.5;25
-La Comarca;DEGUSTACION;3;6.5;150
-Mordor;AVENTURA;25;3;4
-Abismo de Helm;PAISAJE;5;2;15
-Lothlorien;DEGUSTACION;35;1;30
-Erebor;PAISAJE;12;3;32
-Bosque Negro;AVENTURA;3;4;12
+Hoth;AVENTURA;10;2;6
+Tatooine;PAISAJE;5;2.5;25
+Coruscant;DEGUSTACION;3;6.5;150
+Estrella de la Muerte;AVENTURA;25;3;4
+Kashyyk;PAISAJE;5;2;15
+Geonosis;DEGUSTACION;35;1;30
+Naboo;PAISAJE;12;3;32
+Kamino;AVENTURA;3;4;12

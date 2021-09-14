@@ -20,16 +20,17 @@ public class PromocionPorcentual extends Promocion {
 			costoTotal += atraccion.getCosto();
 		}
 
-		return costoTotal * (1 - descuento / 100);
+		return Math.round(costoTotal * (1 - descuento));
 	}
 
 	public double getDescuento() {
 		return 0;
 	}
 
-	/*@Override
+	@Override
 	public String toString() {
-		return "Tipo de Atraccion = " + tipo + "\tDescuento = " + descuento + "\nAtracciones = "
-				+ atracciones + "\n";
-	}*/
+		return "[" + atracciones.get(0).getNombre() + ", " + atracciones.get(1).getNombre() + "]\nPrecio original: " + super.getCostoSinDescuento() + 
+				" Duracion: " + this.getDuracionTotal() + "\n Precio con descuento: " + this.getCostoTotal();
+
+	}
 }
