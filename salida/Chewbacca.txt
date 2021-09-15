@@ -1,15 +1,15 @@
 TU ITINERARIO
 --------------------------------------------------
-Hola Chewbacca
-Bienvenido a La Guerra de las Galaxias
+¡Hola Chewbacca!
+Bienvenida/o a La Guerra de las Galaxias
 Esperamos que disfrutes de nuestras atracciones
 --------------------------------------------------
 Atracciones de tu itinerario
 --------------------------------------------------
-Kashyyk
+*Kashyyk
 
-Costo total= 5.0
-Duracion total= 2.0
+-Costo total= $ 5.0
+-Duración total= 2.0 horas
          _____
        .'/L|__`.
       / =[_]O|` \

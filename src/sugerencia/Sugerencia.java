@@ -50,14 +50,6 @@ public class Sugerencia {
 		return this.duracion;
 	}
 
-	/*@Override
-	public String toString() {
-		String texto = "\n" + this.getNombresAtracciones();
-		texto += "\nCosto Total = " + costo;
-		texto += "\nHoras utilizadas = " + duracion;
-		return texto;
-	}*/
-
 	public boolean estaEn(ArrayList<Sugerencia> sugerencias) {
 		for (String nombre : this.nombresAtracciones) {
 			for (Sugerencia sugerencia : sugerencias) {

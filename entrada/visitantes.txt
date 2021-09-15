@@ -1,4 +1,4 @@
-Luke Skywalker;AVENTURA;100;15
+Luke Skywalker;AVENTURA;100;8
 Leia Organa;PAISAJE;100;8
 Han Solo;DEGUSTACION;36;8
 Chewbacca;PAISAJE;120;2

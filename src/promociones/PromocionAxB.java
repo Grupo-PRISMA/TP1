@@ -21,19 +21,19 @@ public class PromocionAxB extends Promocion {
 		return super.getDuracionTotal() + this.atraccionGratis.getDuracion();
 	}
 
-
 	@Override
 	public String toString() {
-		return "[" + atracciones.get(0).getNombre() + ", " + atracciones.get(1).getNombre() + "]\nPrecio: " + super.getCostoTotal() + 
-				" Duracion: " + this.getDuracionTotal() +"\nAtraccion Gratis: " + this.atraccionGratis.getNombre() ;
+		return "[" + atracciones.get(0).getNombre() + ", " + atracciones.get(1).getNombre() + "]" + "\n-Duración: "
+				+ this.getDuracionTotal() + " horas" + "\n-Precio: $" + super.getCostoTotal() + "\n-Atracción Gratis: "
+				+ this.atraccionGratis.getNombre();
 
 	}
-	
-	@Override	
+
+	@Override
 	public boolean hayCupo() {
 		return super.hayCupo() && this.atraccionGratis.hayCupo();
 	}
-	
+
 	public Atraccion getAtraccionGratis() {
 		return this.atraccionGratis;
 	}

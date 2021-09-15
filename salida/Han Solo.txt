@@ -1,16 +1,16 @@
 TU ITINERARIO
 --------------------------------------------------
-Hola Han Solo
-Bienvenido a La Guerra de las Galaxias
+¡Hola Han Solo!
+Bienvenida/o a La Guerra de las Galaxias
 Esperamos que disfrutes de nuestras atracciones
 --------------------------------------------------
 Atracciones de tu itinerario
 --------------------------------------------------
-Geonosis
-Coruscant
+*Geonosis
+*Coruscant
 
-Costo total= 35.0
-Duracion total= 7.5
+-Costo total= $ 35.0
+-Duración total= 7.5 horas
          _____
        .'/L|__`.
       / =[_]O|` \

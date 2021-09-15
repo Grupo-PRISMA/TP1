@@ -19,8 +19,8 @@ public class PromocionAbsoluta extends Promocion {
 
 	@Override
 	public String toString() {
-		return "[" + atracciones.get(0).getNombre() + ", " + atracciones.get(1).getNombre() + "]\nPrecio original: " + super.getCostoSinDescuento() + 
-				" Duracion: " + this.getDuracionTotal() + "\nPrecio con descuento: " + super.getCostoTotal();
-
+		return "[" + atracciones.get(0).getNombre() + ", " + atracciones.get(1).getNombre() + "]\n-Duración: "
+				+ this.getDuracionTotal() + " horas" + "\n-Precio original: $" + super.getCostoSinDescuento()
+				+ "\n-Precio con descuento: $" + this.getCostoTotal();
 	}
 }

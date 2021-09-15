@@ -1,16 +1,17 @@
 TU ITINERARIO
 --------------------------------------------------
-Hola Leia Organa
-Bienvenido a La Guerra de las Galaxias
+¡Hola Leia Organa!
+Bienvenida/o a La Guerra de las Galaxias
 Esperamos que disfrutes de nuestras atracciones
 --------------------------------------------------
 Atracciones de tu itinerario
 --------------------------------------------------
-Estrella de la Muerte
-Hoth
+*Naboo
+*Tatooine
+*Kashyyk
 
-Costo total= 28.0
-Duracion total= 5.0
+-Costo total= $ 17.0
+-Duración total= 7.5 horas
          _____
        .'/L|__`.
       / =[_]O|` \

@@ -84,11 +84,12 @@ public class PlataformaWeb {
 		return sugerencias;
 	}
 
-	private ArrayList<Sugerencia> crearSugerenciasPromocionesConPreferencias(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
+	private ArrayList<Sugerencia> crearSugerenciasPromocionesConPreferencias(Visitante visitante,
+			ArrayList<Sugerencia> sugerencias) {
 		for (Promocion promocion : this.promociones) {
 			Sugerencia sugerencia = new Sugerencia(promocion);
 			if (!sugerencia.estaEn(sugerencias) && this.validaRequisitosPromocionPreferencia(visitante, promocion)) {
-				System.out.println("Promocion:" + promocion);
+				System.out.println("Promocion pack " + promocion.getTipo() + "\n-Atracciones incluidas: " + promocion);
 				System.out.println("");
 				if (visitante.decidirSugerencia(sugerencia)) {
 					System.out.println("¡Aceptada!");
@@ -104,14 +105,16 @@ public class PlataformaWeb {
 		return sugerencias;
 	}
 
-	private ArrayList<Sugerencia> crearSugerenciasAtraccionesConPreferencias(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
+	private ArrayList<Sugerencia> crearSugerenciasAtraccionesConPreferencias(Visitante visitante,
+			ArrayList<Sugerencia> sugerencias) {
 		for (Atraccion atraccion : this.atracciones) {
 			Sugerencia sugerencia = new Sugerencia(atraccion);
 
 			if (!sugerencia.estaEn(sugerencias) && this.validaRequisitosAtraccionPreferencia(visitante, atraccion)) {
-
-				System.out.println("Atraccion: " + atraccion.getNombre() + "\n");
-				System.out.println("Costo total: " + atraccion.getCosto() + ", Duracion: " + atraccion.getDuracion());
+				System.out
+						.println("Atracción tipo " + atraccion.getTipo() + "\nNombre: [" + atraccion.getNombre() + "]");
+				System.out.println(
+						"-Precio: $" + atraccion.getCosto() + "\n-Duración: " + atraccion.getDuracion() + " horas");
 				System.out.println("");
 				if (visitante.decidirSugerencia(sugerencia)) {
 					System.out.println("¡Aceptada!");
@@ -125,20 +128,22 @@ public class PlataformaWeb {
 		return sugerencias;
 	}
 
-	private ArrayList<Sugerencia> crearSugerenciasSinPreferencia(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
+	private ArrayList<Sugerencia> crearSugerenciasSinPreferencia(Visitante visitante,
+			ArrayList<Sugerencia> sugerencias) {
 		sugerencias = this.crearSugerenciasPromocionesSinPreferencias(visitante, sugerencias);
 		sugerencias = this.crearSugerenciasAtraccionesSinPreferencias(visitante, sugerencias);
 
 		return sugerencias;
 	}
 
-	private ArrayList<Sugerencia> crearSugerenciasPromocionesSinPreferencias(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
+	private ArrayList<Sugerencia> crearSugerenciasPromocionesSinPreferencias(Visitante visitante,
+			ArrayList<Sugerencia> sugerencias) {
 
 		for (Promocion promocion : this.promociones) {
 			Sugerencia sugerencia = new Sugerencia(promocion);
-			
+
 			if (!sugerencia.estaEn(sugerencias) && this.validaRequisitosPromocion(visitante, promocion)) {
-				System.out.println("Promocion: " + promocion);
+				System.out.println("Promocion pack " + promocion.getTipo() + "\n-Atracciones incluidas: " + promocion);
 				System.out.println("");
 				if (visitante.decidirSugerencia(sugerencia)) {
 					System.out.println("¡Aceptada!");
@@ -153,14 +158,17 @@ public class PlataformaWeb {
 		return sugerencias;
 	}
 
-	private ArrayList<Sugerencia> crearSugerenciasAtraccionesSinPreferencias(Visitante visitante, ArrayList<Sugerencia> sugerencias) {
+	private ArrayList<Sugerencia> crearSugerenciasAtraccionesSinPreferencias(Visitante visitante,
+			ArrayList<Sugerencia> sugerencias) {
 
 		for (Atraccion atraccion : this.atracciones) {
 			Sugerencia sugerencia = new Sugerencia(atraccion);
 
 			if (!sugerencia.estaEn(sugerencias) && this.validaRequisitosAtraccion(visitante, atraccion)) {
-				System.out.println("Atraccion: " + atraccion.getNombre() + "\n");
-				System.out.println("Costo total: " + atraccion.getCosto() + ", Duracion: " + atraccion.getDuracion());
+				System.out
+						.println("Atracción tipo " + atraccion.getTipo() + "\nNombre: [" + atraccion.getNombre() + "]");
+				System.out.println(
+						"-Precio: $" + atraccion.getCosto() + "\n-Duración: " + atraccion.getDuracion() + " horas");
 				System.out.println("");
 				if (visitante.decidirSugerencia(sugerencia)) {
 					System.out.println("¡Aceptada!");
@@ -182,42 +190,31 @@ public class PlataformaWeb {
 		String cadenaNombres = "";
 
 		String texto = "TU ITINERARIO\n" + "-".repeat(50);
-		texto += "\nHola " + visitante.getNombre() + "\nBienvenido a La Guerra de las Galaxias";
+		texto += "\n¡Hola " + visitante.getNombre() + "!\nBienvenida/o a La Guerra de las Galaxias";
 		texto += "\nEsperamos que disfrutes de nuestras atracciones";
 		texto += "\n" + "-".repeat(50);
 		texto += "\nAtracciones de tu itinerario";
 		texto += "\n" + "-".repeat(50);
-		
 
 		for (Sugerencia sugerencia : itinerario) {
 			nombres = sugerencia.getNombresAtracciones();
 			for (int i = 0; i < nombres.size(); i++) {
 				String cadena = nombres.get(i);
-				cadenaNombres += cadena + "\n";
+				cadenaNombres += "*"+ cadena + "\n";
 			}
 			costoTotal += sugerencia.getCosto();
 			duracionTotal += sugerencia.getDuracion();
 		}
 
-		texto += "\n" + cadenaNombres + "\nCosto total= " + costoTotal + "\nDuracion total= " + duracionTotal;
-		
-		texto += "\r\n"
-				+ "         _____\r\n"
-				+ "       .'/L|__`.\r\n"
-				+ "      / =[_]O|` \\\r\n"
-				+ "      |\"+_____\":|\r\n"
-				+ "    __:='|____`-:__\r\n"
-				+ "   ||[] ||====| []||\r\n"
-				+ "   ||[] | |=| | []||\r\n"
-				+ "   |:||_|=|U| |_||:|\r\n"
-				+ "   |:|||]_=_ =[_||:| \r\n"
-				+ "   | |||] [_][]C|| |\r\n"
-				+ "   | ||-'\"\"\"\"\"`-|| |\r\n"
-				+ "   /|\\\\_\\_|_|_/_//|\\\r\n"
-				+ "  |___|   /|\\   |___| \r\n"
-				+ "  `---'  |___|  `---' \r\n"
-				+ "         `---'\r\n";
-		
+		texto += "\n" + cadenaNombres + "\n-Costo total= $ " + costoTotal + "\n-Duración total= " + duracionTotal
+				+ " horas";
+
+		texto += "\r\n" + "         _____\r\n" + "       .'/L|__`.\r\n" + "      / =[_]O|` \\\r\n"
+				+ "      |\"+_____\":|\r\n" + "    __:='|____`-:__\r\n" + "   ||[] ||====| []||\r\n"
+				+ "   ||[] | |=| | []||\r\n" + "   |:||_|=|U| |_||:|\r\n" + "   |:|||]_=_ =[_||:| \r\n"
+				+ "   | |||] [_][]C|| |\r\n" + "   | ||-'\"\"\"\"\"`-|| |\r\n" + "   /|\\\\_\\_|_|_/_//|\\\r\n"
+				+ "  |___|   /|\\   |___| \r\n" + "  `---'  |___|  `---' \r\n" + "         `---'\r\n";
+
 		return texto;
 	}
 
